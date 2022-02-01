@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/01 09:57:31 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/01 14:00:08 by tkirihar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,29 +18,36 @@ SRCS	:= $(addprefix $(SRCDIR), $(SRCNAME))
 OBJSDIR	:= ./obj/
 OBJS 	:= $(addprefix $(OBJSDIR), $(SRCNAME:%.c=%.o))
 
-CC		:= gcc 
+CC		:= gcc
 CFLAGS	:= -Wall -Werror -Wextra
 DEBUG	:= -g -fsanitize=address
 INC		:= -I ./includes/
 RM		:= rm -rf
+LDFLAGS := -Llib/ft_printf -Llib/gnl -Llib/libft
+LIBS 	:= -lftprintf -lgnl -lft
 
-all: $(NAME)
+all: lib $(NAME)
+
+lib :
+	make -C lib/ft_printf
+	make -C lib/gnl
+	make -C lib/libft
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(INC) $^ -o $@
+	$(CC) $(CFLAGS) $(INC) ${LDFLAGS} ${LIBS} $^ -o $@
 
 $(OBJSDIR)%.o : $(SRCDIR)%.c
 	@if [ ! -d $(OBJSDIR) ]; then mkdir $(OBJSDIR); fi
 	${CC} ${CFLAGS} $(INC) -c $< -o $@
 
-clean: 
+clean:
 	$(RM) $(OBJSDIR)
 
 fclean: clean
-	${RM} ${NAME} 
+	${RM} ${NAME}
 re:	fclean all
 
 debug:	CFLAGS += $(DEBUG)
 debug:	re
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug lib
