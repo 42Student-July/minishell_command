@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 11:06:47 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:59:09 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,11 @@ void		execute_builtin(char *const *command, char **environ);
 char *const	*create_builtin_cmd(int argc, const char *argv[]);
 void		x_execve(char *const *command, char *const *environ);
 bool		is_not_exec_path(const char *command);
+
+// self_pwd.c
+void		self_pwd(char **environ);
+
+// self_cd.c
+void		self_cd(const char **command, char **environ);
 
 #endif
