@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:54:54 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 14:58:43 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:25:01 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	x_chdir(const char *path)
 	}
 }
 
-void	self_cd(const char **command, char **environ)
+void	self_cd(char *const *command, char **environ)
 {
 	(void)environ;
-	x_chdir(command[2]);
+	x_chdir(command[DIR]);
 }

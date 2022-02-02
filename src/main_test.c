@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 14:43:34 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:15:50 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ int	main(int argc, const char *argv[])
 {
 	char		**environ;
 	char *const	*command;
-	int			command_num;
 
 	environ = NULL;
-	command_num = argc;
 	if (is_self_cmd(argv[1]))
-		execute_self(argv, environ);
+	{
+		command = create_self_cmd(argc, argv);
+		execute_self(command, environ);
+	}
 	else
 	{
-		command = create_builtin_cmd(command_num, argv);
+		command = create_builtin_cmd(argc, argv);
 		execute_builtin(command, environ);
 	}
 	return (0);

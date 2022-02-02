@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 14:59:09 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:24:57 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@
 # define PWD "pwd"
 # define EXIT "exit"
 # define MY_COMMAND_NUM 4
-# define NAME 0
+# define CMD_NAME 0
+# define DIR 1
 
 
 // execute_self.c
 bool		is_self_cmd(const char *c);
-bool		execute_self(const char **command, char **environ);
+bool		execute_self(char *const *argv, char **environ);
+char *const	*create_self_cmd(int argc, const char **argv);
+
 
 // execute_builtin.c
 void		execute_builtin(char *const *command, char **environ);
@@ -50,6 +53,6 @@ bool		is_not_exec_path(const char *command);
 void		self_pwd(char **environ);
 
 // self_cd.c
-void		self_cd(const char **command, char **environ);
+void		self_cd(char *const *command, char **environ);
 
 #endif

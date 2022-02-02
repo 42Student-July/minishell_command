@@ -6,24 +6,40 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 14:56:14 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:21:06 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
 // echo などの自作コマンドを実行する関数
-bool	execute_self(const char **command, char **environ)
+bool	execute_self(char *const *command, char **environ)
 {
 	(void)environ;
-	if (ft_strncmp(command[1], CD, ft_strlen(CD)) == 0)
+	if (ft_strncmp(command[CMD_NAME], CD, ft_strlen(CD)) == 0)
 		self_cd(command, environ);
-	else if (ft_strncmp(command[1], PWD, ft_strlen(PWD)) == 0)
+	else if (ft_strncmp(command[CMD_NAME], PWD, ft_strlen(PWD)) == 0)
 		self_pwd(environ);
 	else
 		return (false);
 	// my_pwd(environ);
 	return (true);
+}
+
+// TODO: いずれリファクタ
+char *const *create_self_cmd(int argc, const char **argv)
+{
+	int		i;
+	char 	**command;
+
+	i = 0;
+	command = (char **)malloc(sizeof(char *) * (argc - 1 + 1));
+	while (i < argc - 1)
+	{
+		command[i] = ft_strdup(argv[i + 1]);
+		i++;
+	}
+	return (command);
 }
 
 bool	is_self_cmd(const char *c)

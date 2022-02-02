@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 11:07:20 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:11:59 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	execute_builtin(char *const *command, char **environ)
 void	x_execve(char *const *command, char *const *environ)
 {
 	// TODO: NULL判定などは未実装
-	if (execve(command[0], command, environ) == -1)
+	if (execve(command[CMD_NAME], command, environ) == -1)
 	{
 		printf("stderror(perror) : %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
