@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 15:11:59 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 17:12:41 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,20 @@ char *const	*create_builtin_cmd(int argc, const char *argv[])
 	// argv[0]は実行コマンドなんで、なくす。
 	// 最後のNULL止めのために+1する。
 	command = (char **)malloc(sizeof(char *) * (argc - 1 + 1));
+	if (command == NULL)
+		 abort_minishell(MALLOC_ERROR, command);
 	if (is_not_exec_path(argv[1]))
 	{
 		command[i] = ft_strjoin(bin_path, argv[1]);
+		if (command[i] == NULL)
+			abort_minishell(MALLOC_ERROR, command);
 		i++;
 	}
 	while (i < argc - 1)
 	{
 		command[i] = ft_strdup(argv[i + 1]);
+		if (command[i] == NULL)
+			abort_minishell(MALLOC_ERROR, command);
 		i++;
 	}
 	return (command);

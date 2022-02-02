@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 15:21:06 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 17:13:14 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,13 @@ char *const *create_self_cmd(int argc, const char **argv)
 
 	i = 0;
 	command = (char **)malloc(sizeof(char *) * (argc - 1 + 1));
+	if (command == NULL)
+		 abort_minishell(MALLOC_ERROR, command);
 	while (i < argc - 1)
 	{
 		command[i] = ft_strdup(argv[i + 1]);
+		if (command[i] == NULL)
+			abort_minishell(MALLOC_ERROR, command);
 		i++;
 	}
 	return (command);

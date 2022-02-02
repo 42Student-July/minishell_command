@@ -6,7 +6,7 @@
 #    By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/02 15:03:17 by tkirihar         ###   ########.fr        #
+#    Updated: 2022/02/02 17:16:12 by tkirihar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCNAME	:=	main_test.c \
 			execute_self.c \
 			self_pwd.c \
 			self_cd.c \
+			error_handling.c \
 
 
 SRCS	:= $(addprefix $(SRCDIR), $(SRCNAME))

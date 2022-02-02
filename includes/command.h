@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 15:24:57 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 17:11:37 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "../lib/libft/libft.h"
 # include "../lib/gnl/get_next_line.h"
 # include "color.h"
+# include "error_msg.h"
 
 # define CD "cd"
 # define ECHO "echo"
@@ -36,12 +37,10 @@
 # define CMD_NAME 0
 # define DIR 1
 
-
 // execute_self.c
 bool		is_self_cmd(const char *c);
 bool		execute_self(char *const *argv, char **environ);
 char *const	*create_self_cmd(int argc, const char **argv);
-
 
 // execute_builtin.c
 void		execute_builtin(char *const *command, char **environ);
@@ -54,5 +53,9 @@ void		self_pwd(char **environ);
 
 // self_cd.c
 void		self_cd(char *const *command, char **environ);
+
+// error_handling.c
+void	free_all(char **command);
+void	abort_minishell(char *msg, char **command);
 
 #endif

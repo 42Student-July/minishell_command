@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 15:15:50 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 17:03:23 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int	main(int argc, const char *argv[])
 		command = create_builtin_cmd(argc, argv);
 		execute_builtin(command, environ);
 	}
+
 	return (0);
 }
