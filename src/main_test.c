@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/01 16:46:22 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 10:33:17 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,54 @@ char *const	*create_command(int argc, const char *argv[])
 }
 
 // echo などの自作コマンドを実行する関数
-// bool	execute_my_command()
-// {
+bool	execute_my_command(const char *c, char **environ)
+{
+	(void)c;
+	(void)environ;
+	printf("my command kita\n");
+	return (true);
+}
 
-// }
+bool	is_my_command(const char *c)
+{
+	if (
+		ft_strncmp(c, CD, ft_strlen(CD)) ||
+		ft_strncmp(c, ECHO, ft_strlen(ECHO)) ||
+		ft_strncmp(c, PWD, ft_strlen(PWD)) ||
+		ft_strncmp(c, EXIT, ft_strlen(EXIT))
+		)
+		return (true);
+	return (false);
+}
 
-// bool	is_my_command(char *const *c)
-// {
-// 	if (	c[NAME] == CD ||
-// 			c[NAME] == ECHO ||
-// 			c[NAME] == PWD ||
-// 			c[NAME] == EXIT
-// 		)
-// 		return (true);
-// 	return (false);
-// }
+void	hoge_fork(char *const *command, char **environ)
+{
+	pid_t	pid;
+	int		status;
+	pid_t	error_num;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		printf("Error\n");
+		exit(1);
+	}
+	else if (pid == 0)
+	{
+		printf("ch\n");
+		execute_command(command, environ);
+	}
+	else
+	{
+		printf("parent\n");
+		error_num = wait(&status);
+		if (pid == -1)
+		{
+			printf("Error\n");
+			exit(1);
+		}
+	}
+}
 
 int	main(int argc, const char *argv[])
 {
@@ -83,11 +116,14 @@ int	main(int argc, const char *argv[])
 	char *const	*command;
 	int			command_num;
 
+	environ = NULL;
 	command_num = argc;
-	command = create_command(command_num, argv);
-	// if (is_my_command(command))
-	// 	execute_my_command(command, environ);
-	// 第1引数 PATH, 第2引数 コマンド名＋実行引数
-	execute_command(command, environ);
+	if (is_my_command(argv[1]))
+		execute_my_command(argv[1], environ);
+	else
+	{
+		command = create_command(command_num, argv);
+		hoge_fork(command, environ);
+	}
 	return (0);
 }
