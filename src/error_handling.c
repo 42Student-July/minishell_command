@@ -1,25 +1,28 @@
 #include "../includes/command.h"
 
-void	free_all(char **command)
+void	free_all(t_exec_attr *ea)
 {
 	int	i;
 
 	i = 0;
-	if (command != NULL)
+
+	if (ea->command != NULL)
 	{
-		while (command[i] != NULL)
+		while (ea->command[i] != NULL)
 		{
-			free(command[i]);
+			free(ea->command[i]);
 			i++;
 		}
-		free(command);
+		free(ea->command);
 	}
+	if (ea != NULL)
+		free(ea);
 }
 
-void	abort_minishell(char *msg, char **command)
+void	abort_minishell(char *msg, t_exec_attr *ea)
 {
-	if (command != NULL)
-		free_all(command);
+	if (ea != NULL)
+		free_all(ea);
 	ft_putstr_fd(msg, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }

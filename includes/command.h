@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 17:11:37 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 17:42:23 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,19 @@
 # define CMD_NAME 0
 # define DIR 1
 
+typedef struct s_exec_attr
+{
+	char *const *command;
+	char 		*infile;
+	char		*outfile;
+	char		**env;
+}	t_exec_attr;
+
+
 // execute_self.c
 bool		is_self_cmd(const char *c);
-bool		execute_self(char *const *argv, char **environ);
-char *const	*create_self_cmd(int argc, const char **argv);
+bool		execute_self(int argc, const char *argv[], char **environ);
+char *const *create_self_cmd(int argc, const char **argv, char *infile, char *outfile);
 
 // execute_builtin.c
 void		execute_builtin(char *const *command, char **environ);

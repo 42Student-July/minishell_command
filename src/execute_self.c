@@ -6,16 +6,16 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 17:13:14 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 17:49:57 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
 // echo などの自作コマンドを実行する関数
-bool	execute_self(char *const *command, char **environ)
+bool	execute_self(int argc, const char *argv[], t_exec_attr *e_attr)
 {
-	(void)environ;
+	create_self_cmd(argc, argv, e_attr);
 	if (ft_strncmp(command[CMD_NAME], CD, ft_strlen(CD)) == 0)
 		self_cd(command, environ);
 	else if (ft_strncmp(command[CMD_NAME], PWD, ft_strlen(PWD)) == 0)
@@ -27,7 +27,7 @@ bool	execute_self(char *const *command, char **environ)
 }
 
 // TODO: いずれリファクタ
-char *const *create_self_cmd(int argc, const char **argv)
+char *const *create_self_cmd(int argc, const char **argv, t_exec_attr *ea)
 {
 	int		i;
 	char 	**command;
@@ -38,10 +38,24 @@ char *const *create_self_cmd(int argc, const char **argv)
 		 abort_minishell(MALLOC_ERROR, command);
 	while (i < argc - 1)
 	{
-		command[i] = ft_strdup(argv[i + 1]);
-		if (command[i] == NULL)
-			abort_minishell(MALLOC_ERROR, command);
-		i++;
+		if (strcmp(argv[i], "<") == 0)
+		{
+			ea->infile = strdup(argv[i + 1]);
+			i++;
+		}
+		else if (strcmp(argv[i], ">") == 0)
+		{
+			outfile = strdup(argv[i + 1]);
+			i++;
+		}
+		else
+		{
+			command[i] = ft_strdup(argv[i + 1]);
+			if (command[i] == NULL)
+				abort_minishell(MALLOC_ERROR, command);
+			i++;
+		}
+
 	}
 	return (command);
 }
