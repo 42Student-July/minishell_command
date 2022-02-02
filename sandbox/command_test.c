@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 11:06:07 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:22:27 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,68 @@ char *const	*create_command(int argc, const char *argv[])
 	return (command);
 }
 
-bool	my_cd(char *const *command, char **environ)
+static void	print_cwd(void)
+{
+    char pathname[BUFSIZ] = {"\0"};
+
+}
+
+void	x_chdir(const char *path)
+{
+	if (chdir(path) == -1)
+	{
+		printf("stderror(perror) : %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+	print_cwd();
+}
+
+void	my_cd(const char **command, char **environ)
 {
 	(void)environ;
-	if (chdir(command[2]) == -1)
+	x_chdir(command[2]);
+}
+
+void	x_getcwd(char *pathname, int bufsiz)
+{
+	if (getcwd(pathname, bufsiz) == NULL)
 	{
-		printf("Error");
+		printf("stderror(perror) : %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
 	}
 }
 
+void	my_pwd(const char **command, char **environ)
+{
+	char	pathname[BUFSIZ];
+
+	(void)environ;
+	x_getcwd(pathname, BUFSIZ);
+	printf("%s\n", pathname);
+}
+
 // echo などの自作コマンドを実行する関数
-bool	execute_my_command(char *const *command, char **environ)
+bool	execute_my_command(const char **command, char **environ)
 {
 	(void)environ;
-	printf("my command kita\n");
-	if (ft_strncmp(command[1], CD, ft_strlen(CD)))
+	if (ft_strncmp(command[1], CD, ft_strlen(CD)) == 0)
 		my_cd(command, environ);
+	if (ft_strncmp(command[1], PWD, ft_strlen(PWD)) == 0)
+		my_pwd(command, environ);
+	my_pwd(command, environ);
 	return (true);
 }
 
 bool	is_my_command(const char *c)
 {
+	size_t c_len;
+
+	c_len = ft_strlen(c);
 	if (
-		ft_strncmp(c, CD, ft_strlen(CD)) ||
-		ft_strncmp(c, ECHO, ft_strlen(ECHO)) ||
-		ft_strncmp(c, PWD, ft_strlen(PWD)) ||
-		ft_strncmp(c, EXIT, ft_strlen(EXIT))
+		ft_strncmp(c, CD, c_len) &&
+		ft_strncmp(c, ECHO, c_len) &&
+		ft_strncmp(c, PWD, c_len) &&
+		ft_strncmp(c, EXIT, c_len)
 		)
 		return (false);
 	return (true);
@@ -131,8 +167,11 @@ int	main(int argc, const char *argv[])
 	// argvの引数は修正が必要そう
 	if (is_my_command(argv[1]))
 		execute_my_command(argv, environ);
-	command = create_command(command_num, argv);
-	hoge_fork(command, environ);
+	else
+	{
+		command = create_command(command_num, argv);
+		hoge_fork(command, environ);
+	}
 	// 第1引数 PATH, 第2引数 コマンド名＋実行引数
 	return (0);
 }
