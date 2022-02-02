@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 17:12:41 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 18:34:04 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-void	execute_builtin(char *const *command, char **environ)
+void	execute_builtin(int argc, const char *argv[], t_exec_attr *ea)
 {
 	pid_t	pid;
 	int		status;
 	pid_t	error_num;
 
+	create_builtin_cmd(argc, argv, ea);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -27,7 +28,7 @@ void	execute_builtin(char *const *command, char **environ)
 	else if (pid == 0)
 	{
 		printf("ch\n");
-		x_execve(command, environ);
+		x_execve(ea);
 	}
 	else
 	{
@@ -41,10 +42,10 @@ void	execute_builtin(char *const *command, char **environ)
 	}
 }
 
-void	x_execve(char *const *command, char *const *environ)
+void	x_execve(t_exec_attr *ea)
 {
 	// TODO: NULL判定などは未実装
-	if (execve(command[CMD_NAME], command, environ) == -1)
+	if (execve(ea->command[CMD_NAME], ea->command, ea->env) == -1)
 	{
 		printf("stderror(perror) : %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
@@ -65,7 +66,7 @@ bool	is_not_exec_path(const char *command)
 	return (true);
 }
 
-char *const	*create_builtin_cmd(int argc, const char *argv[])
+void	create_builtin_cmd(int argc, const char *argv[], t_exec_attr *ea)
 {
 	int		i;
 	char	*bin_path;
@@ -77,20 +78,20 @@ char *const	*create_builtin_cmd(int argc, const char *argv[])
 	// 最後のNULL止めのために+1する。
 	command = (char **)malloc(sizeof(char *) * (argc - 1 + 1));
 	if (command == NULL)
-		 abort_minishell(MALLOC_ERROR, command);
+		abort_minishell(MALLOC_ERROR, ea);
 	if (is_not_exec_path(argv[1]))
 	{
 		command[i] = ft_strjoin(bin_path, argv[1]);
 		if (command[i] == NULL)
-			abort_minishell(MALLOC_ERROR, command);
+			abort_minishell(MALLOC_ERROR, ea);
 		i++;
 	}
 	while (i < argc - 1)
 	{
 		command[i] = ft_strdup(argv[i + 1]);
 		if (command[i] == NULL)
-			abort_minishell(MALLOC_ERROR, command);
+			abort_minishell(MALLOC_ERROR, ea);
 		i++;
 	}
-	return (command);
+	ea->command = command;
 }

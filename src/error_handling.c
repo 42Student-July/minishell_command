@@ -13,7 +13,7 @@ void	free_all(t_exec_attr *ea)
 			free(ea->command[i]);
 			i++;
 		}
-		free(ea->command);
+		free((void *)ea->command);
 	}
 	if (ea != NULL)
 		free(ea);

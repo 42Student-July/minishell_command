@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   self_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:54:57 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 15:15:49 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 18:36:19 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	x_getcwd(char *pathname, int bufsiz)
 	}
 }
 
-void	self_pwd(char **environ)
+void	self_pwd(t_exec_attr *ea)
 {
 	char	pathname[BUFSIZ];
 
-	(void)environ;
+	(void)ea;
 	x_getcwd(pathname, BUFSIZ);
 	printf("%s\n", pathname);
 }

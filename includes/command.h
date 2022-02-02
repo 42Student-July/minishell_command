@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 17:42:23 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 18:33:36 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,23 @@ typedef struct s_exec_attr
 
 // execute_self.c
 bool		is_self_cmd(const char *c);
-bool		execute_self(int argc, const char *argv[], char **environ);
-char *const *create_self_cmd(int argc, const char **argv, char *infile, char *outfile);
+bool		execute_self(int argc, const char *argv[], t_exec_attr *ea);
+void		create_self_cmd(int argc, const char *argv[], t_exec_attr *ea);
 
 // execute_builtin.c
-void		execute_builtin(char *const *command, char **environ);
-char *const	*create_builtin_cmd(int argc, const char *argv[]);
-void		x_execve(char *const *command, char *const *environ);
+void		execute_builtin(int argc, const char *argv[], t_exec_attr *ea);
+void		create_builtin_cmd(int argc, const char *argv[], t_exec_attr *ea);
+void		x_execve(t_exec_attr *ea);
 bool		is_not_exec_path(const char *command);
 
 // self_pwd.c
-void		self_pwd(char **environ);
+void		self_pwd(t_exec_attr *ea);
 
 // self_cd.c
-void		self_cd(char *const *command, char **environ);
+void		self_cd(t_exec_attr *ea);
 
 // error_handling.c
-void	free_all(char **command);
-void	abort_minishell(char *msg, char **command);
+void		free_all(t_exec_attr *ea);
+void		abort_minishell(char *msg, t_exec_attr *ea);
 
 #endif

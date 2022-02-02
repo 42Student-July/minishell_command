@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   self_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:54:54 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 15:25:01 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 18:09:58 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static void	x_chdir(const char *path)
 	}
 }
 
-void	self_cd(char *const *command, char **environ)
+void	self_cd(t_exec_attr *ea)
 {
-	(void)environ;
-	x_chdir(command[DIR]);
+	x_chdir(ea->command[DIR]);
 }
