@@ -1,6 +1,7 @@
 {
 	"files.associations": {
-		"command.h": "c"
+		"command.h": "c",
+		"string.h": "c"
 	},
 	"cSpell.words": [
 		"mhirabay"
