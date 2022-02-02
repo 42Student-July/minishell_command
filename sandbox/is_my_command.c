@@ -2,15 +2,17 @@
 
 bool	is_my_command(const char *c)
 {
-	if (ft_strncmp(c, CD, ft_strlen(CD)))
-		return (true);
-	if (ft_strncmp(c, ECHO, ft_strlen(ECHO)))
-		return (true);
-	if (ft_strncmp(c, PWD, ft_strlen(PWD)))
-		return (true);
-	if (ft_strncmp(c, EXIT, ft_strlen(EXIT)))
-		return (true);
-	return (false);
+	size_t c_len;
+
+	c_len = ft_strlen(c);
+	if (
+		ft_strncmp(c, CD, c_len) &&
+		ft_strncmp(c, ECHO, c_len) &&
+		ft_strncmp(c, PWD, c_len) &&
+		ft_strncmp(c, EXIT, c_len)
+		)
+		return (false);
+	return (true);
 }
 
 int	main(int argc, const char *argv[])

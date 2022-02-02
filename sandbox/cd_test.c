@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 10:33:12 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:06:07 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,22 @@ char *const	*create_command(int argc, const char *argv[])
 	return (command);
 }
 
-// echo などの自作コマンドを実行する関数
-bool	execute_my_command(const char *c, char **environ)
+bool	my_cd(char *const *command, char **environ)
 {
-	(void)c;
+	(void)environ;
+	if (chdir(command[2]) == -1)
+	{
+		printf("Error");
+	}
+}
+
+// echo などの自作コマンドを実行する関数
+bool	execute_my_command(char *const *command, char **environ)
+{
 	(void)environ;
 	printf("my command kita\n");
-	if (ft_strncmp(c, CD, ft_strlen(CD)))
+	if (ft_strncmp(command[1], CD, ft_strlen(CD)))
+		my_cd(command, environ);
 	return (true);
 }
 
@@ -121,7 +130,7 @@ int	main(int argc, const char *argv[])
 	command_num = argc;
 	// argvの引数は修正が必要そう
 	if (is_my_command(argv[1]))
-		execute_my_command(argv[1], environ);
+		execute_my_command(argv, environ);
 	command = create_command(command_num, argv);
 	hoge_fork(command, environ);
 	// 第1引数 PATH, 第2引数 コマンド名＋実行引数
