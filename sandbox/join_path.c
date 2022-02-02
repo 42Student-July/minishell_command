@@ -75,7 +75,6 @@ int	main(int argc, const char *argv[])
 
 	command_num = argc;
 	command = create_command(command_num, argv);
-
 	// 第1引数 PATH, 第2引数 コマンド名＋実行引数
 	execute_command(command, environ);
 	return (0);
