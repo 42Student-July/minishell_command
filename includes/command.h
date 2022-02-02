@@ -38,7 +38,7 @@
 
 // execute_self.c
 bool		is_self_cmd(const char *c);
-bool		execute_self(const char *c, char **environ);
+bool		execute_self(const char **command, char **environ);
 
 // execute_builtin.c
 void		execute_builtin(char *const *command, char **environ);
