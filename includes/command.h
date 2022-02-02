@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 09:48:35 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:06:47 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@
 # define MY_COMMAND_NUM 4
 # define NAME 0
 
-bool	is_my_command(const char *c);
+
+// execute_self.c
+bool		is_self_cmd(const char *c);
+bool		execute_self(const char *c, char **environ);
+
+// execute_builtin.c
+void		execute_builtin(char *const *command, char **environ);
+char *const	*create_builtin_cmd(int argc, const char *argv[]);
+void		x_execve(char *const *command, char *const *environ);
+bool		is_not_exec_path(const char *command);
 
 #endif

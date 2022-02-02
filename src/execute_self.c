@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   execute_self.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 11:06:12 by tkirihar         ###   ########.fr       */
+/*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
+/*   Updated: 2022/02/02 11:07:19 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-int	main(int argc, const char *argv[])
+// echo などの自作コマンドを実行する関数
+bool	execute_self(const char *c, char **environ)
 {
-	char		**environ;
-	char *const	*command;
-	int			command_num;
+	(void)c;
+	(void)environ;
+	printf("my command kita\n");
+	return (true);
+}
 
-	environ = NULL;
-	command_num = argc;
-	if (is_self_cmd(argv[1]))
-		execute_self(argv[1], environ);
-	else
-	{
-		command = create_command(command_num, argv);
-		execute_builtin(command, environ);
-	}
-	return (0);
+
+bool	is_self_cmd(const char *c)
+{
+	size_t c_len;
+
+	c_len = ft_strlen(c);
+	if (
+		ft_strncmp(c, CD, c_len) &&
+		ft_strncmp(c, ECHO, c_len) &&
+		ft_strncmp(c, PWD, c_len) &&
+		ft_strncmp(c, EXIT, c_len)
+		)
+		return (false);
+	return (true);
 }
