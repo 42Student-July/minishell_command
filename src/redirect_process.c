@@ -6,11 +6,18 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 10:07:21 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/03 10:13:42 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:00:11 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
+
+bool	is_redirect(t_exec_attr *ea)
+{
+	if (ea->infile != NULL || ea->outfile != NULL)
+		return (true);
+	return (false);
+}
 
 void	change_direction(t_exec_attr *ea)
 {

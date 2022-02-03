@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 10:46:12 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 13:58:39 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	execute_builtin(t_exec_attr *ea)
 		abort_minishell(FORK_ERROR, ea);
 	else if (pid == 0)
 	{
-		change_direction(ea);
+		if (is_redirect(ea))
+			change_direction(ea);
 		x_execve(ea);
 	}
 	else
@@ -79,10 +80,25 @@ void	create_builtin_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea)
 	}
 	while (i < argc - 1)
 	{
-		command[i] = ft_strdup(argv[i + 1]);
-		if (command[i] == NULL)
-			abort_minishell(MALLOC_ERROR, ea);
-		i++;
+		// TODO: この辺わかりにくいので、リファクタ検討
+		// parseの方で判定できたらそれがよい。
+		if (strcmp(argv[i + 1], "<") == 0)
+		{
+			ea->infile = strdup(argv[i + 2]);
+			i++;
+		}
+		else if (ft_strncmp(argv[i + 1], ">", ft_strlen(argv[i + 1])) == 0)
+		{
+			ea->outfile = strdup(argv[i + 2]);
+			i++;
+		}
+		else
+		{
+			command[i] = ft_strdup(argv[i + 1]);
+			if (command[i] == NULL)
+				abort_minishell(MALLOC_ERROR, ea);
+			i++;
+		}
 	}
 	ea->command = command;
 }

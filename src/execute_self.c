@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 10:45:52 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 13:58:54 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ bool	execute_self(t_exec_attr *ea)
 		abort_minishell(FORK_ERROR, ea);
 	else if (pid == 0)
 	{
+		if (is_redirect(ea))
+			change_direction(ea);
 		if (is_(PWD, ea))
 			exec_self_pwd(ea);
 	}
@@ -58,14 +60,14 @@ void	create_self_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea)
 		abort_minishell(MALLOC_ERROR, ea);
 	while (i < argc - 1)
 	{
-		if (strcmp(argv[i], "<") == 0)
+		if (strcmp(argv[i + 1], "<") == 0)
 		{
-			ea->infile = strdup(argv[i + 1]);
+			ea->infile = strdup(argv[i + 2]);
 			i++;
 		}
-		else if (strcmp(argv[i], ">") == 0)
+		else if (ft_strncmp(argv[i + 1], ">", ft_strlen(argv[i + 1])) == 0)
 		{
-			ea->outfile = strdup(argv[i + 1]);
+			ea->outfile = strdup(argv[i + 2]);
 			i++;
 		}
 		else
