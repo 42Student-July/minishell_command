@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   self_pwd.c                                         :+:      :+:    :+:   */
+/*   redirect_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 14:54:57 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 10:28:00 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/03 10:07:21 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/03 10:13:42 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-static void	x_getcwd(char *pathname, int bufsiz)
+void	change_direction(t_exec_attr *ea)
 {
-	if (getcwd(pathname, bufsiz) == NULL)
+	if (ea->infile != NULL)
 	{
-		printf("stderror(perror) : %s\n", strerror(errno));
-		exit(EXIT_FAILURE);
+		close(STDIN_FILENO);
+		if (open(ea->infile, O_RDONLY) == -1)
+			abort_minishell(ea->infile, ea);
 	}
-}
-
-void	exec_self_pwd(t_exec_attr *ea)
-{
-	char	pathname[BUFSIZ];
-
-	(void)ea;
-	x_getcwd(pathname, BUFSIZ);
-	printf("%s\n", pathname);
+	if (ea->outfile != NULL)
+	{
+		close(STDOUT_FILENO);
+		if (open(ea->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0666) == -1)
+			abort_minishell(ea->infile, ea);
+	}
 }

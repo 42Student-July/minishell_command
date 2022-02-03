@@ -6,21 +6,43 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 09:35:39 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:45:52 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
+// 引数のコマンド名と実行時のコマンドが一致していたらtrue
+bool	is_(const char *command, t_exec_attr *ea)
+{
+	if (ft_strncmp(ea->command[CMD_NAME], command, ft_strlen(command)) == 0)
+		return (true);
+	return (false);
+}
+
 // echo などの自作コマンドを実行する関数
 bool	execute_self(t_exec_attr *ea)
 {
-	if (ft_strncmp(ea->command[CMD_NAME], CD, ft_strlen(CD)) == 0)
-		self_cd(ea);
-	else if (ft_strncmp(ea->command[CMD_NAME], PWD, ft_strlen(PWD)) == 0)
-		self_pwd(ea);
+	pid_t	pid;
+	int		status;
+
+	// cdは子プロセスで実行しないので、forkする前に事前実行
+	if (is_(CD, ea))
+		exec_self_cd(ea);
+	pid = fork();
+	if (pid == -1)
+		abort_minishell(FORK_ERROR, ea);
+	else if (pid == 0)
+	{
+		if (is_(PWD, ea))
+			exec_self_pwd(ea);
+	}
 	else
-		return (false);
+	{
+		pid = wait(&status);
+		if (pid == -1)
+			abort_minishell(FORK_ERROR, ea);
+	}
 	return (true);
 }
 

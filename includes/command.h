@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/03 09:35:49 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:09:45 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,16 @@ void		x_execve(t_exec_attr *ea);
 bool		is_not_exec_path(const char *command);
 
 // self_pwd.c
-void		self_pwd(t_exec_attr *ea);
+void		exec_self_pwd(t_exec_attr *ea);
 
 // self_cd.c
-void		self_cd(t_exec_attr *ea);
+void		exec_self_cd(t_exec_attr *ea);
 
 // error_handling.c
 void		free_all(t_exec_attr *ea);
 void		abort_minishell(char *msg, t_exec_attr *ea);
+
+// redirect_process.c
+void		change_direction(t_exec_attr *ea);
 
 #endif

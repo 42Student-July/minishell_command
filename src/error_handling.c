@@ -21,8 +21,8 @@ void	free_all(t_exec_attr *ea)
 
 void	abort_minishell(char *msg, t_exec_attr *ea)
 {
+	perror(msg);
 	if (ea != NULL)
 		free_all(ea);
-	ft_putstr_fd(msg, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }

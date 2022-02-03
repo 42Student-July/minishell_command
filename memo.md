@@ -1,0 +1,1 @@
+is_self_commandの条件分岐をcmp == 0のif文を複数個並べる方法に変える
