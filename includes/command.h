@@ -67,4 +67,7 @@ void		self_cd(t_exec_attr *ea);
 void		free_all(t_exec_attr *ea);
 void		abort_minishell(char *msg, t_exec_attr *ea);
 
+// redirect_process.c
+void		change_direction(t_exec_attr *ea);
+
 #endif

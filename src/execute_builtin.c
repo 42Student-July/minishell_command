@@ -26,7 +26,7 @@ void	execute_builtin(t_exec_attr *ea)
 	}
 	else if (pid == 0)
 	{
-		printf("ch\n");
+		change_direction(ea);
 		x_execve(ea);
 	}
 	else
