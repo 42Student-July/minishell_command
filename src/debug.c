@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_process.c                                 :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 10:07:21 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/03 14:00:11 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/03 13:31:50 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/03 13:33:30 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-bool	is_redirect(t_exec_attr *ea)
+void	print_command_debug(t_exec_attr *ea)
 {
-	if (ea->infile != NULL || ea->outfile != NULL)
-		return (true);
-	return (false);
-}
+	size_t	i;
 
-void	change_direction(t_exec_attr *ea)
-{
-	if (ea->infile != NULL)
+	i = 0;
+	while (ea->command[i] != NULL)
 	{
-		close(STDIN_FILENO);
-		if (open(ea->infile, O_RDONLY) == -1)
-			abort_minishell(ea->infile, ea);
-	}
-	if (ea->outfile != NULL)
-	{
-		close(STDOUT_FILENO);
-		if (open(ea->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0666) == -1)
-			abort_minishell(ea->infile, ea);
+		printf("ea->command[i] : %s\n", ea->command[i]);
+		i++;
 	}
 }
