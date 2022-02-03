@@ -58,10 +58,10 @@ void		x_execve(t_exec_attr *ea);
 bool		is_not_exec_path(const char *command);
 
 // self_pwd.c
-void		self_pwd(t_exec_attr *ea);
+void		exec_self_pwd(t_exec_attr *ea);
 
 // self_cd.c
-void		self_cd(t_exec_attr *ea);
+void		exec_self_cd(t_exec_attr *ea);
 
 // error_handling.c
 void		free_all(t_exec_attr *ea);
