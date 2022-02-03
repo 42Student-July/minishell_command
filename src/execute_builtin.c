@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 09:35:55 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:20:22 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@ void	execute_builtin(t_exec_attr *ea)
 {
 	pid_t	pid;
 	int		status;
-	pid_t	error_num;
 
 	pid = fork();
 	if (pid == -1)
-	{
-		printf("Error\n");
-		exit(1);
-	}
+		abort_minishell(FORK_ERROR, ea);
 	else if (pid == 0)
 	{
 		change_direction(ea);
@@ -31,13 +27,8 @@ void	execute_builtin(t_exec_attr *ea)
 	}
 	else
 	{
-		printf("parent\n");
-		error_num = wait(&status);
-		if (pid == -1)
-		{
-			printf("Error\n");
-			exit(1);
-		}
+		if (wait(&status) == (pid_t) -1)
+			abort_minishell(FORK_ERROR, ea);
 	}
 }
 
