@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 10:20:22 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:46:12 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	execute_builtin(t_exec_attr *ea)
 	}
 	else
 	{
-		if (wait(&status) == (pid_t) -1)
+		pid = wait(&status);
+		if (pid == -1)
 			abort_minishell(FORK_ERROR, ea);
 	}
 }
