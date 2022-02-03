@@ -6,19 +6,18 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 18:34:04 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 09:35:55 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-void	execute_builtin(int argc, const char *argv[], t_exec_attr *ea)
+void	execute_builtin(t_exec_attr *ea)
 {
 	pid_t	pid;
 	int		status;
 	pid_t	error_num;
 
-	create_builtin_cmd(argc, argv, ea);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -66,7 +65,7 @@ bool	is_not_exec_path(const char *command)
 	return (true);
 }
 
-void	create_builtin_cmd(int argc, const char *argv[], t_exec_attr *ea)
+void	create_builtin_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea)
 {
 	int		i;
 	char	*bin_path;

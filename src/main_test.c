@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 18:29:17 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 09:35:49 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@ int	main(int argc, const char *argv[])
 	if (e_attr == NULL)
 		abort_minishell(MALLOC_ERROR, e_attr);
 	if (is_self_cmd(argv[1]))
-		execute_self(argc, argv, e_attr);
+	{
+		create_self_cmd_from_arg(argc, argv, e_attr);
+		execute_self(e_attr);
+	}
 	else
-		execute_builtin(argc, argv, e_attr);
-
+	{
+		create_builtin_cmd_from_arg(argc, argv, e_attr);
+		execute_builtin(e_attr);
+	}
 	return (0);
 }

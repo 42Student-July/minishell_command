@@ -6,16 +6,15 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/02 18:34:41 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 09:35:39 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
 // echo などの自作コマンドを実行する関数
-bool	execute_self(int argc, const char *argv[], t_exec_attr *ea)
+bool	execute_self(t_exec_attr *ea)
 {
-	create_self_cmd(argc, argv, ea);
 	if (ft_strncmp(ea->command[CMD_NAME], CD, ft_strlen(CD)) == 0)
 		self_cd(ea);
 	else if (ft_strncmp(ea->command[CMD_NAME], PWD, ft_strlen(PWD)) == 0)
@@ -26,7 +25,7 @@ bool	execute_self(int argc, const char *argv[], t_exec_attr *ea)
 }
 
 // TODO: いずれリファクタ
-void	create_self_cmd(int argc, const char **argv, t_exec_attr *ea)
+void	create_self_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea)
 {
 	int		i;
 	char	**command;
