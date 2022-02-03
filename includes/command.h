@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/02 18:33:36 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/03 09:35:49 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ typedef struct s_exec_attr
 
 // execute_self.c
 bool		is_self_cmd(const char *c);
-bool		execute_self(int argc, const char *argv[], t_exec_attr *ea);
-void		create_self_cmd(int argc, const char *argv[], t_exec_attr *ea);
+bool		execute_self(t_exec_attr *ea);
+void		create_self_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
 
 // execute_builtin.c
-void		execute_builtin(int argc, const char *argv[], t_exec_attr *ea);
-void		create_builtin_cmd(int argc, const char *argv[], t_exec_attr *ea);
+void		execute_builtin(t_exec_attr *ea);
+void		create_builtin_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
 void		x_execve(t_exec_attr *ea);
 bool		is_not_exec_path(const char *command);
 
