@@ -3,7 +3,7 @@
 void	new_sigint(int sig)
 {
 	printf("new_sigint\n");
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
 
 void	set_sigint()
@@ -13,6 +13,21 @@ void	set_sigint()
 	act.sa_flags = 0;
 	sigemptyset(&act.sa_mask);
 	sigaction(SIGINT, &act, NULL);
+}
+
+void	new_sigquit(int sig)
+{
+	printf("new_sigquit\n");
+	exit(EXIT_SUCCESS);
+}
+
+void	set_sigquit()
+{
+	struct sigaction act;
+	act.sa_handler = new_sigquit;
+	act.sa_flags = 0;
+	sigemptyset(&act.sa_mask);
+	sigaction(SIGQUIT, &act, NULL);
 }
 
 void	set_signal()
