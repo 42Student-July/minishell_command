@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 13:58:54 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:25:01 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,13 @@ bool	is_self_cmd(const char *c)
 	size_t	c_len;
 
 	c_len = ft_strlen(c);
-	if (
-		ft_strncmp(c, CD, c_len)
-		&& ft_strncmp(c, ECHO, c_len)
-		&& ft_strncmp(c, PWD, c_len)
-		&& ft_strncmp(c, EXIT, c_len)
-	)
-		return (false);
+	if (ft_strncmp(c, CD, c_len) == 0)
+		return (true);
+	if (ft_strncmp(c, ECHO, c_len) == 0)
+		return (true);
+	if (ft_strncmp(c, PWD, c_len) == 0)
+		return (true);
+	if (ft_strncmp(c, EXIT, c_len) == 0)
+		return (true);
 	return (true);
 }
