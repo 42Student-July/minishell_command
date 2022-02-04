@@ -113,7 +113,7 @@ void	free_pfd(int **pfd, int pipe_cnt)
 		free(pfd[i]);
 		i++;
 	}
-	free(pdf);
+	free(pfd);
 }
 
 void	loop_pipe_process(char **command_lst, int *pipe_locate, int pipe_cnt)
@@ -151,7 +151,7 @@ void	loop_pipe_process(char **command_lst, int *pipe_locate, int pipe_cnt)
 		}
 		command_i++;
 	}
-	free_pfd(pfd);
+	free_pfd(pfd, pipe_cnt);
 }
 
 void	no_pipe_process()
