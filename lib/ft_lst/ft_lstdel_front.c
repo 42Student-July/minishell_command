@@ -12,7 +12,7 @@
 
 #include "ft_lst.h"
 
-int	ft_lstdel_front(t_lst **lst)
+bool	ft_lstdel_front(t_lst **lst)
 {	
 	t_lst	*tmp;
 

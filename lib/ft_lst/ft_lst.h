@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 09:32:37 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 09:56:44 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:49:27 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,21 @@
 # include <stdbool.h>
 # include <stdio.h>
 
-typedef struct s_kvs
-{
-	char	*key;
-	char	*value;
-}	t_kvs;
-
 typedef struct s_lst
 {
 	void			*content;
 	struct s_lst	*next;
 }	t_lst;
 
-int		ft_lstadd_back(t_lst **lst, t_lst *new);
+typedef void(*	t_content_f)(void *);
+
+bool	ft_lstadd_back(t_lst **lst, t_lst *new);
 void	ft_lstadd_front(t_lst **lst, t_lst *new);
-int		ft_lstaddone_front(t_lst **lst, t_lst *new);
+bool	ft_lstaddone_front(t_lst **lst, t_lst *new);
 void	ft_lstclear(t_lst **lst, void (*del)(void *));
-int		ft_lstdel_front(t_lst **lst);
+bool	ft_lstdel_front(t_lst **lst);
 void	ft_lstdelone(t_lst *lst);
-void	ft_lstiter(t_lst *lst, void (*f)(void *));
+bool	ft_lstiter(t_lst *lst, t_content_f f);
 t_lst	*ft_lstlast(t_lst *lst);
 t_lst	*ft_lstmap(t_lst *lst, int (*f)(void *), void (*del)(void *));
 t_lst	*ft_lstnew(void *c);

@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/04 10:00:18 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/04 14:41:41 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,9 +56,9 @@ clean:
 	$(RM) $(OBJSDIR)
 
 fclean: clean
-	make clean -C lib/ft_printf 
-	make clean -C lib/libft
-	make clean -C lib/ft_lst
+	make fclean -C lib/ft_printf 
+	make fclean -C lib/libft
+	make fclean -C lib/ft_lst
 	${RM} ${NAME}
 re:	fclean all
 

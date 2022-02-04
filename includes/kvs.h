@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   kvs.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 17:31:24 by mhirabay          #+#    #+#             */
-/*   Updated: 2021/10/18 17:31:25 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/04 13:27:53 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/04 13:28:48 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef KVS_H
+# define KVS_H
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+# define KEY 0
+# define VALUE 1
+
+typedef struct s_kvs
 {
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
-}
+	char	*key;
+	char	*value;
+}	t_kvs;
+
+
+#endif

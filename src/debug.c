@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 13:31:50 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/03 13:33:30 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:59:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,13 @@ void	print_command_debug(t_exec_attr *ea)
 		printf("ea->command[i] : %s\n", ea->command[i]);
 		i++;
 	}
+}
+
+void	print_kvs(void *content)
+{
+	t_kvs	*kvs;
+
+	kvs = (t_kvs *)content;
+	printf("kvs->key : %s\n", kvs->key);
+	printf("kvs->value : %s\n", kvs->value);
 }

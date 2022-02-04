@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/03 13:59:36 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:59:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 # include "../lib/ft_printf/ft_printf.h"
 # include "../lib/libft/libft.h"
 # include "../lib/gnl/get_next_line.h"
+# include "../lib/ft_lst/ft_lst.h"
 # include "color.h"
 # include "error_msg.h"
+# include "kvs.h"
 
 # define CD "cd"
 # define ECHO "echo"
@@ -73,5 +75,6 @@ bool		is_redirect(t_exec_attr *ea);
 
 // debug.c
 void		print_command_debug(t_exec_attr *ea);
+void		print_kvs(void *content);
 
 #endif
