@@ -53,6 +53,9 @@ typedef struct s_exec_attr
 bool		is_self_cmd(const char *c);
 bool		execute_self(t_exec_attr *ea);
 void		create_self_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
+void		exec_in_child_process(t_exec_attr *ea);
+void		exec_in_main_process(t_exec_attr *ea);
+
 
 // execute_builtin.c
 void		execute_builtin(t_exec_attr *ea);
