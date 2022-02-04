@@ -12,7 +12,7 @@
 
 #include "ft_lst.h"
 
-int	ft_lstadd_back(t_lst **lst, t_lst *new)
+bool	ft_lstadd_back(t_lst **lst, t_lst *new)
 {
 	t_lst	*tmp;
 
