@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/04 15:25:01 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:41:05 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ bool	execute_self(t_exec_attr *ea)
 			change_direction(ea);
 		if (is_(PWD, ea))
 			exec_self_pwd(ea);
+		if (is_(ENV, ea))
+			exec_self_env(ea);
 	}
 	else
 	{
@@ -93,6 +95,8 @@ bool	is_self_cmd(const char *c)
 	if (ft_strncmp(c, PWD, c_len) == 0)
 		return (true);
 	if (ft_strncmp(c, EXIT, c_len) == 0)
+		return (true);
+	if (ft_strncmp(c, ENV, c_len) == 0)
 		return (true);
 	return (true);
 }

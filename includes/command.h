@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 15:15:32 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:43:30 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define ECHO "echo"
 # define PWD "pwd"
 # define EXIT "exit"
+# define ENV "env"
 # define MY_COMMAND_NUM 4
 # define CMD_NAME 0
 # define DIR 1
@@ -65,6 +66,9 @@ void		exec_self_pwd(t_exec_attr *ea);
 // self_cd.c
 void		exec_self_cd(t_exec_attr *ea);
 
+// self_env.c
+void		exec_self_env(t_exec_attr *ea);
+
 // error_handling.c
 void		free_all(t_exec_attr *ea);
 void		abort_minishell(char *msg, t_exec_attr *ea);
@@ -80,5 +84,6 @@ void		print_kvs_debug(void *content);
 // env.c
 void		store_env(t_exec_attr *ea, char **environ);
 void		free_line(char **line);
+void		print_env(void *content);
 
 #endif

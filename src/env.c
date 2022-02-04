@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:01:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 15:21:45 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:38:39 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ void	store_env(t_exec_attr *ea, char **environ)
 		i++;
 		free_line(line);
 	}
-	ft_lstiter(env_lst, f);
+	// ft_lstiter(env_lst, f);
 	ea->env = env_lst;
+}
+
+void	print_env(void *content)
+{
+	t_kvs	*kvs;
+
+	kvs = (t_kvs *)content;
+	printf("%s=%s\n", kvs->key, kvs->value);
 }
