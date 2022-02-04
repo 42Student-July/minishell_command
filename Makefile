@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/04 14:41:41 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/04 15:17:29 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRCNAME	:=	main_test.c \
 			error_handling.c \
 			redirect_process.c \
 			debug.c \
+			env.c \
+			kvs.c \
 
 
 SRCS	:= $(addprefix $(SRCDIR), $(SRCNAME))

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 14:57:10 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:15:32 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@
 
 typedef struct s_exec_attr
 {
-	char *const *command;
-	char 		*infile;
+	char *const	*command;
+	char		*infile;
 	char		*outfile;
-	char		**env;
+	t_lst		*env;
 }	t_exec_attr;
 
 
@@ -76,5 +76,9 @@ bool		is_redirect(t_exec_attr *ea);
 // debug.c
 void		print_command_debug(t_exec_attr *ea);
 void		print_kvs_debug(void *content);
+
+// env.c
+void		store_env(t_exec_attr *ea, char **environ);
+void		free_line(char **line);
 
 #endif

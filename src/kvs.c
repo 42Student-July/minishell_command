@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   store_env_test.c                                   :+:      :+:    :+:   */
+/*   kvs_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 10:47:13 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 15:03:26 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/04 14:43:17 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/04 14:44:27 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,4 @@ void	*create_content(char *key, char *value)
 		return (NULL);
 	}
 	return ((void *)kvs);
-}
-
-int	main(void)
-{
-	int			i;
-	extern char	**environ;
-	char		**line;
-	t_lst		*env_lst;
-	t_content_f	f;
-
-	i = 0;
-	f = print_kvs_debug;
-	env_lst = NULL;
-	while (environ[i] != NULL)
-	{
-		line = ft_split(environ[i], '=');
-		if (line == NULL)
-			exit(1);
-		ft_lstadd_back(&env_lst, \
-		ft_lstnew(create_content(line[KEY], line[VALUE])));
-		if (env_lst == NULL)
-			exit(1);
-		i++;
-		free(line);
-	}
-	ft_lstiter(env_lst, f);
-
-	return (0);
 }
