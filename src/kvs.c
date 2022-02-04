@@ -1,34 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   kvs_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 13:31:50 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 14:56:50 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/04 14:43:17 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/04 14:44:27 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-void	print_command_debug(t_exec_attr *ea)
+void	free_all_kvs(t_kvs *kvs)
 {
-	size_t	i;
-
-	i = 0;
-	while (ea->command[i] != NULL)
+	if (kvs != NULL)
 	{
-		printf("ea->command[i] : %s\n", ea->command[i]);
-		i++;
+		if (kvs->key != NULL)
+			free(kvs->key);
+		if (kvs->value != NULL)
+			free(kvs->value);
+		free(kvs);
 	}
 }
 
-void	print_kvs_debug(void *content)
+void	*create_content(char *key, char *value)
 {
 	t_kvs	*kvs;
 
-	kvs = (t_kvs *)content;
-	printf("kvs->key : %s\n", kvs->key);
-	printf("kvs->value : %s\n", kvs->value);
+	kvs = (t_kvs *)malloc(sizeof(t_kvs));
+	if (kvs == NULL)
+		return (NULL);
+	kvs->key = ft_strdup(key);
+	if (kvs->key == NULL)
+		return (NULL);
+	kvs->value = ft_strdup(value);
+	if (kvs->value == NULL)
+	{
+		free(kvs->key);
+		return (NULL);
+	}
+	return ((void *)kvs);
 }
