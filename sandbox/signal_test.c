@@ -3,7 +3,7 @@
 void	new_sigint(int sig)
 {
 	printf("new_sigint\n");
-	exit(EXIT_SUCCESS);
+	// メインプログラムを呼び出す
 }
 
 void	set_sigint()
