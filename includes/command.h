@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 16:43:30 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:17:36 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@
 # define PWD "pwd"
 # define EXIT "exit"
 # define ENV "env"
+# define EXPORT "export"
 # define MY_COMMAND_NUM 4
 # define CMD_NAME 0
+# define CMD_ARG 1
 # define DIR 1
 
 typedef struct s_exec_attr
@@ -71,6 +73,9 @@ void		exec_self_cd(t_exec_attr *ea);
 
 // self_env.c
 void		exec_self_env(t_exec_attr *ea);
+
+// self_export.c
+void		exec_self_export(t_exec_attr *ea);
 
 // error_handling.c
 void		free_all(t_exec_attr *ea);
