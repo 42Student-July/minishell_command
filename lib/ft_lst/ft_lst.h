@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 09:32:37 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 09:56:44 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:02:30 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,13 @@
 # include <stdbool.h>
 # include <stdio.h>
 
-typedef struct s_kvs
-{
-	char	*key;
-	char	*value;
-}	t_kvs;
-
 typedef struct s_lst
 {
 	void			*content;
 	struct s_lst	*next;
 }	t_lst;
+
+typedef void(*	t_content_f)(void *);
 
 int		ft_lstadd_back(t_lst **lst, t_lst *new);
 void	ft_lstadd_front(t_lst **lst, t_lst *new);
