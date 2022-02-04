@@ -14,14 +14,12 @@
 
 void	ft_lstiter(t_lst *lst, t_content_f f)
 {
-	t_lst	*tmp;
 
-	if (!lst || !f)
+	if (lst == NULL || f == NULL)
 		return ;
-	tmp = lst;
-	while (tmp != NULL)
+	while (lst != NULL)
 	{
 		f(lst->content);
-		tmp = tmp->next;
+		lst = lst->next;
 	}
 }

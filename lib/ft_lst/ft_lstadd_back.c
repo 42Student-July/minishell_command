@@ -16,7 +16,7 @@ int	ft_lstadd_back(t_lst **lst, t_lst *new)
 {
 	t_lst	*tmp;
 
-	if (!lst || !new)
+	if (lst == NULL || new == NULL)
 		return (false);
 	if (*lst == NULL)
 		*lst = new;
