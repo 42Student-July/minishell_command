@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/03 13:38:44 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/04 10:00:18 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ lib :
 	make -C lib/ft_printf
 	make -C lib/gnl
 	make -C lib/libft
+	make -C lib/ft_lst
 
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) $(INC) ${LDFLAGS} ${LIBS} $^ -o $@
@@ -49,9 +50,15 @@ $(OBJSDIR)%.o : $(SRCDIR)%.c
 	${CC} ${CFLAGS} $(INC) -c $< -o $@
 
 clean:
+	make clean -C lib/ft_printf 
+	make clean -C lib/libft
+	make clean -C lib/ft_lst
 	$(RM) $(OBJSDIR)
 
 fclean: clean
+	make clean -C lib/ft_printf 
+	make clean -C lib/libft
+	make clean -C lib/ft_lst
 	${RM} ${NAME}
 re:	fclean all
 
