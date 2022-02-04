@@ -31,8 +31,8 @@ CFLAGS	:= -Wall -Werror -Wextra
 DEBUG	:= -g -fsanitize=address
 INC		:= -I ./includes/
 RM		:= rm -rf
-LDFLAGS := -Llib/ft_printf -Llib/gnl -Llib/libft
-LIBS 	:= -lftprintf -lgnl -lft
+LDFLAGS := -Llib/ft_printf -Llib/gnl -Llib/libft -Llib/ft_lst
+LIBS 	:= -lftprintf -lgnl -lft -llst
 
 all: lib $(NAME)
 
