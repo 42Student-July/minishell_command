@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 13:31:50 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 13:59:09 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:56:50 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_command_debug(t_exec_attr *ea)
 	}
 }
 
-void	print_kvs(void *content)
+void	print_kvs_debug(void *content)
 {
 	t_kvs	*kvs;
 

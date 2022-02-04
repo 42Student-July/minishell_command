@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 13:59:23 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:57:10 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ bool		is_redirect(t_exec_attr *ea);
 
 // debug.c
 void		print_command_debug(t_exec_attr *ea);
-void		print_kvs(void *content);
+void		print_kvs_debug(void *content);
 
 #endif
