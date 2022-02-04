@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 17:15:05 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:46:06 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	export_with_args(t_exec_attr *ea)
 	if (arg == NULL)
 		abort_minishell(MALLOC_ERROR, ea);
 	flag = ft_lstadd_back(&ea->env, \
-		ft_lstnew(create_content(arg[KEY], arg[VALUE])));
+		ft_lstnew(create_content_kvs(arg[KEY], arg[VALUE])));
 	if (!flag)
 	{
 		free_line(arg);

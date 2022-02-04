@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kvs_utils.c                                        :+:      :+:    :+:   */
+/*   kvs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:43:17 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 14:44:27 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:42:49 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_all_kvs(t_kvs *kvs)
 	}
 }
 
-void	*create_content(char *key, char *value)
+void	*create_content_kvs(char *key, char *value)
 {
 	t_kvs	*kvs;
 
