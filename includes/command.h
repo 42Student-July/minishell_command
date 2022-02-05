@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 17:17:36 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:35:30 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_exec_attr
 	char		*infile;
 	char		*outfile;
 	t_lst		*env;
+	t_lst		*export;
 }	t_exec_attr;
 
 
