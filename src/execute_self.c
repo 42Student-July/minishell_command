@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/04 16:41:05 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:28:10 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ bool	is_self_cmd(const char *c)
 		return (true);
 	if (ft_strncmp(c, ENV, c_len) == 0)
 		return (true);
-	return (true);
+	return (false);
 }

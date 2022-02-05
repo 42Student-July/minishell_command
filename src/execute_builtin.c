@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 13:58:39 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:28:37 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	execute_builtin(t_exec_attr *ea)
 void	x_execve(t_exec_attr *ea)
 {
 	// TODO: NULL判定などは未実装
-	if (execve(ea->command[CMD_NAME], ea->command, ea->env) == -1)
+	if (execve(ea->command[CMD_NAME], ea->command, NULL) == -1)
 	{
 		printf("stderror(perror) : %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
