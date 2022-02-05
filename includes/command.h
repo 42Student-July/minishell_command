@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/05 10:12:59 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:20:35 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 # define CMD_NAME 0
 # define CMD_ARG 1
 # define DIR 1
-# define EXPORT_CONST_LEN 15
 # define NULL_CHAR 1
+# define DQUOTE 2
 
 typedef struct s_exec_attr
 {
@@ -99,5 +99,7 @@ void		print_env(void *content);
 
 // export.c
 void		store_export(t_exec_attr *ea, char **environ);
+void		print_export(void *content);
+
 
 #endif

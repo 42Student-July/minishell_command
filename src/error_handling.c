@@ -21,6 +21,8 @@ void	free_all(t_exec_attr *ea)
 
 void	abort_minishell(char *msg, t_exec_attr *ea)
 {
+	//TODO: いずれ削除する
+	printf("msg : %s\n", msg);
 	perror(msg);
 	if (ea != NULL)
 		free_all(ea);
