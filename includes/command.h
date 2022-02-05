@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 20:35:30 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/05 09:29:49 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define CMD_NAME 0
 # define CMD_ARG 1
 # define DIR 1
+# define EXPORT_CONST_LEN 15
+# define NULL_CHAR 1
 
 typedef struct s_exec_attr
 {
