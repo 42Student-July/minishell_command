@@ -16,10 +16,10 @@
 */
 int	main(void)
 {
-	char *prompt = getenv("PS2");
+	char *prompt = "minishell $";
 	char *line = NULL;
 	int history_i = 0;
-	HIST_ENTRY *rm_history = NULL;
+	HIST_ENTRY *rm_history;
 
 	while (1)
 	{
