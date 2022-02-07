@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/05 13:46:54 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 11:07:52 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void		print_env(void *content);
 
 // export.c
 void		store_export(t_exec_attr *ea, char **environ);
-void		print_export(void *content);
+void		print_export_kvs(void *content);
+void		print_all_export_lst(t_lst *export_lst);
 
 // init.c
 void		init(t_exec_attr **ea);

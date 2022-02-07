@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/05 13:21:40 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 09:27:59 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	export_with_args(t_exec_attr *ea)
 {
 	char		**arg;
 	bool		flag;
-	t_content_f	f;
 
-	f = print_export;
 	if (ea->command[CMD_ARG] != NULL)
 	{
 		arg = ft_split(ea->command[CMD_ARG], '=');
@@ -36,10 +34,7 @@ void	export_with_args(t_exec_attr *ea)
 
 void	export_no_args(t_exec_attr *ea)
 {
-	t_content_f	f;
-
-	f = print_export;
-	ft_lstiter(ea->export, f);
+	print_all_export_lst(ea->export);
 }
 
 void	exec_self_export(t_exec_attr *ea)
