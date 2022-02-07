@@ -28,20 +28,28 @@ void	set_sigint()
 	sigaction(SIGINT, &act, NULL);
 }
 
-void	test_readline()
+char	*x_readline()
 {
 	char *prompt = "minishell $";
+	char *cmd = NULL;
+
+	signal(SIGQUIT, SIG_IGN); // sigquitがきたら無視する
+	g_is_waiting_for_input = true;
+	cmd = readline(prompt);
+	g_is_waiting_for_input = false;
+	signal(SIGQUIT, SIG_DFL); // sigquitをデフォルト動作に戻す
+	return (cmd);
+}
+
+void	test_readline()
+{
 	char *cmd = NULL;
 	int history_i = 0;
 	HIST_ENTRY *rm_history = NULL;
 
 	while (1)
 	{
-		signal(SIGQUIT, SIG_IGN); // sigquitがきたら無視する
-		g_is_waiting_for_input = true;
-		cmd = readline(prompt);
-		g_is_waiting_for_input = false;
-		signal(SIGQUIT, SIG_DFL); // sigquitをデフォルト動作に戻す
+		cmd = x_readline();
 		if (cmd == NULL)
 			break ;
 		printf("%s\n", cmd);
