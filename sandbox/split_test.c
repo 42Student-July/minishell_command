@@ -11,6 +11,8 @@ int main(int argc, char const *argv[])
 	char	**split_array;
 	
 	// 二次元配列がNULLになることはない。
+	// equalがある時と無い時ではarray[1]にどちらもNULLが入ってしまう。
+	// そのせいで=が入っているかどうか判定できない。
 	// → 嘘 引数が ""だった場合、NULLが入るように実装されている
 	// separatorが文字列中に存在しない場合、最初の配列にすべての文字が入る
 	split_array = ft_split(argv[1], '=');
