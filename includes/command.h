@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 14:55:41 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/07 17:58:27 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define DIR 1
 # define NULL_CHAR 1
 # define DQUOTE 2
+# define INVALID_IDENTIFER 0
 
 typedef struct s_exec_attr
 {
@@ -85,6 +86,7 @@ void		exec_self_env(t_exec_attr *ea);
 
 // self_export.c
 void		exec_self_export(t_exec_attr *ea);
+void		store_arg_only_export(t_exec_attr *ea, char *key);
 
 // error_handling.c
 void		free_exec_attr(t_exec_attr *ea);
@@ -103,11 +105,15 @@ void		print_kvs_debug(void *content);
 // env.c
 void		store_env(t_exec_attr *ea, char **environ);
 void		free_split(char **line);
-void		print_env(void *content);
+void		print_all_env_lst(t_lst *env);
+void		print_env_kvs(void *content);
+
 
 // export.c
+char		*create_export_value(char *value);
 void		store_export(t_exec_attr *ea, char **environ);
 void		print_export_kvs(void *content);
+void		sort_ascii(t_lst **export_lst);
 void		print_all_export_lst(t_lst *export_lst);
 
 // init.c

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 17:32:39 by mhirabay          #+#    #+#             */
-/*   Updated: 2021/10/18 17:32:40 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:04:42 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	size_t	i;
 	size_t	condition;
 
+	if (dest == NULL || src == NULL)
+		return (0);
 	dsize = ft_strlen((char *)dest);
 	ssize = ft_strlen((char *)src);
 	total_size = dsize + ssize;
