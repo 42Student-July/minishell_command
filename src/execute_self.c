@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/07 14:16:29 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:23:25 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,32 @@ bool	execute_self(t_exec_attr *ea)
 	// cdは子プロセスで実行しないので、forkする前に事前実行
 	if (is_(CD, ea))
 		exec_self_cd(ea);
-	if (is_(EXIT, ea))
+	else if (is_(EXIT, ea))
 		exec_self_exit(ea);
-	pid = fork();
-	if (pid == -1)
-		abort_minishell(FORK_ERROR, ea);
-	else if (pid == 0)
-	{
-		if (is_redirect(ea))
-			change_direction(ea);
-		if (is_(PWD, ea))
-			exec_self_pwd(ea);
-		if (is_(ECHO, ea))
-			exec_self_echo(ea);
-		if (is_(ENV, ea))
-			exec_self_env(ea);
-	}
 	else
 	{
-		pid = wait(&status);
+		pid = fork();
 		if (pid == -1)
 			abort_minishell(FORK_ERROR, ea);
+		else if (pid == 0)
+		{
+			if (is_redirect(ea))
+				change_direction(ea);
+			else if (is_(PWD, ea))
+				exec_self_pwd(ea);
+			else if (is_(ECHO, ea))
+				exec_self_echo(ea);
+			else if (is_(ENV, ea))
+				exec_self_env(ea);
+		}
+		else
+		{
+			pid = wait(&status);
+			if (pid == -1)
+				abort_minishell(FORK_ERROR, ea);
+		}
 	}
+
 	return (true);
 }
 
