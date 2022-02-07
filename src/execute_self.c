@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/07 14:23:25 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:59:51 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,30 @@ bool	is_(const char *command, t_exec_attr *ea)
 	return (false);
 }
 
+bool	exec_in_main_process(t_exec_attr *ea)
+{
+	if (is_(CD, ea))
+		exec_self_cd(ea);
+	else if (is_(EXPORT, ea))
+		exec_self_export(ea);
+	else if (is_(EXIT, ea))
+		exec_self_exit(ea);
+	else
+		return (false);
+	return (true);
+}
+
+void	exec_in_child_process(t_exec_attr *ea)
+{
+	if (is_(PWD, ea))
+		exec_self_pwd(ea);
+	else if (is_(ECHO, ea))
+		exec_self_echo(ea);
+	else if (is_(ENV, ea))
+		exec_self_env(ea);
+
+}
+
 // echo などの自作コマンドを実行する関数
 bool	execute_self(t_exec_attr *ea)
 {
@@ -27,34 +51,17 @@ bool	execute_self(t_exec_attr *ea)
 	int		status;
 
 	// cdは子プロセスで実行しないので、forkする前に事前実行
-	if (is_(CD, ea))
-		exec_self_cd(ea);
-	else if (is_(EXIT, ea))
-		exec_self_exit(ea);
-	else
+	if (exec_in_main_process(ea))
+		return (true);
+	pid = fork();
+	if (pid == -1)
+		abort_minishell(FORK_ERROR, ea);
+	else if (pid == 0)
 	{
-		pid = fork();
-		if (pid == -1)
-			abort_minishell(FORK_ERROR, ea);
-		else if (pid == 0)
-		{
-			if (is_redirect(ea))
-				change_direction(ea);
-			else if (is_(PWD, ea))
-				exec_self_pwd(ea);
-			else if (is_(ECHO, ea))
-				exec_self_echo(ea);
-			else if (is_(ENV, ea))
-				exec_self_env(ea);
-		}
-		else
-		{
-			pid = wait(&status);
-			if (pid == -1)
-				abort_minishell(FORK_ERROR, ea);
-		}
+		if (is_redirect(ea))
+			change_direction(ea);
+		exec_in_child_process(ea);
 	}
-
 	return (true);
 }
 
@@ -88,6 +95,7 @@ void	create_self_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea)
 			i++;
 		}
 	}
+	command[i] = NULL;
 	ea->command = command;
 }
 
@@ -105,6 +113,8 @@ bool	is_self_cmd(const char *c)
 	if (ft_strncmp(c, EXIT, c_len) == 0)
 		return (true);
 	if (ft_strncmp(c, ENV, c_len) == 0)
+		return (true);
+	if (ft_strncmp(c, EXPORT, c_len) == 0)
 		return (true);
 	return (false);
 }

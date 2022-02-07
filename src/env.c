@@ -6,32 +6,17 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:01:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 16:38:39 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:35:27 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-void	free_line(char **line)
-{
-	size_t	i;
-
-	i = 0;
-	if (line != NULL)
-	{
-		while (line[i] != NULL)
-		{
-			free(line[i]);
-			i++;
-		}
-		free(line);
-	}
-}
 
 void	store_env(t_exec_attr *ea, char **environ)
 {
 	size_t		i;
-	char		**line;
+	char		**split;
 	t_lst		*env_lst;
 	t_content_f	f;
 	bool		flag;
@@ -41,20 +26,16 @@ void	store_env(t_exec_attr *ea, char **environ)
 	i = 0;
 	while (environ[i] != NULL)
 	{
-		line = ft_split(environ[i], '=');
-		if (line == NULL)
+		split = ft_split(environ[i], '=');
+		if (split == NULL)
 			abort_minishell(MALLOC_ERROR, ea);
 		flag = ft_lstadd_back(&env_lst, \
-		ft_lstnew(create_content(line[KEY], line[VALUE])));
+		ft_lstnew(create_content_kvs(split[KEY], split[VALUE])));
 		if (!flag)
-		{
-			free_line(line);
-			abort_minishell(MALLOC_ERROR, ea);
-		}
+			abort_minishell_with(MALLOC_ERROR, ea, split);
 		i++;
-		free_line(line);
+		free_split(split);
 	}
-	// ft_lstiter(env_lst, f);
 	ea->env = env_lst;
 }
 

@@ -1,2 +1,2 @@
 # minishell_command
-minishell コマンドペアプロレポジトリ
+minishell: コマンドペアプロレポジトリ

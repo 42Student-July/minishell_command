@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/05 13:28:37 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:49:40 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void	create_builtin_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea)
 			i++;
 		}
 	}
+	command[i] = NULL;
 	ea->command = command;
 }
