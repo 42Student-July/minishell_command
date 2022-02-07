@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 14:12:56 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:03:10 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ char	*create_export_value(char *value)
 	// 合成して ex)declare -x key="value"を作る
 	char 		*new_value;
 	size_t		new_value_len;
+	size_t		value_len;
 
-	new_value_len = (ft_strlen(value) + DQUOTE + NULL_CHAR);
+	if (value == NULL)
+		value_len = 0;
+	else
+		value_len = ft_strlen(value);
+	new_value_len = (value_len + DQUOTE + NULL_CHAR);
 	new_value = (char *)malloc(sizeof(char) * new_value_len);
 	if (new_value == NULL)
 		return (NULL);
@@ -84,7 +89,8 @@ void	print_export_kvs(void *content)
 	t_kvs	*kvs;
 
 	kvs = (t_kvs *)content;
-	printf("declare -x %s=%s\n", kvs->key, kvs->value);
+	if (kvs->value == NULL)
+		printf("declare -x %s\n", kvs->key);
+	else
+		printf("declare -x %s=%s\n", kvs->key, kvs->value);
 }
-
-

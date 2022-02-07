@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:01:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 14:57:23 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:07:05 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,8 @@ void	print_env_kvs(void *content)
 	t_kvs	*kvs;
 
 	kvs = (t_kvs *)content;
-	printf("%s=%s\n", kvs->key, kvs->value);
+	if (kvs->value == NULL)
+		printf("%s=\n", kvs->key);
+	else
+		printf("%s=%s\n", kvs->key, kvs->value);
 }

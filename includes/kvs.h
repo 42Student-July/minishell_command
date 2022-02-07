@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:27:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 15:05:12 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:54:37 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define KEY 0
 # define VALUE 1
+# define NO_VALUE 1
 # define FIRST_INDEX 0
 
 typedef struct s_kvs

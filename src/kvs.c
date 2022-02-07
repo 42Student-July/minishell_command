@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:43:17 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 15:04:53 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 16:51:05 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,20 @@ void	*create_content_kvs(char *key, char *value)
 	kvs->key = ft_strdup(key);
 	if (kvs->key == NULL)
 		return (NULL);
-	kvs->value = ft_strdup(value);
-	if (kvs->value == NULL)
+	// export k のような形で入る場合を考慮して、valueはnullを許容する
+	if (value != NULL)
 	{
-		free(kvs->key);
-		return (NULL);
+		kvs->value = ft_strdup(value);
+		if (kvs->value == NULL)
+		{
+			free(kvs->key);
+			return (NULL);
+		}
+	}
+	else
+	{
+		printf("value NULL\n");
+		kvs->value = NULL;
 	}
 	return ((void *)kvs);
 }
