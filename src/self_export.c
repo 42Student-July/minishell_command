@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 09:27:59 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:32:44 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	export_with_args(t_exec_attr *ea)
 			ft_lstnew(create_content_kvs(arg[KEY], arg[VALUE])));
 		if (!flag)
 		{
-			free_line(arg);
+			free_split(arg);
 			abort_minishell(MALLOC_ERROR, ea);
 		}
 	}

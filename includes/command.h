@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 11:07:52 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:34:43 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ void		exec_self_env(t_exec_attr *ea);
 void		exec_self_export(t_exec_attr *ea);
 
 // error_handling.c
-void		free_all(t_exec_attr *ea);
+void		free_exec_attr(t_exec_attr *ea);
+void		free_split(char **split);
 void		abort_minishell(char *msg, t_exec_attr *ea);
+void		abort_minishell_with(char *msg, t_exec_attr *ea, char **split);
 
 // redirect_process.c
 void		change_direction(t_exec_attr *ea);
@@ -94,7 +96,7 @@ void		print_kvs_debug(void *content);
 
 // env.c
 void		store_env(t_exec_attr *ea, char **environ);
-void		free_line(char **line);
+void		free_split(char **line);
 void		print_env(void *content);
 
 // export.c
@@ -104,5 +106,8 @@ void		print_all_export_lst(t_lst *export_lst);
 
 // init.c
 void		init(t_exec_attr **ea);
+
+// lst_utils.c
+bool		swap_content(t_lst *a, t_lst *b);
 
 #endif

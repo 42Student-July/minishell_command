@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kvs.h                                              :+:      :+:    :+:   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 13:27:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 13:26:36 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/07 13:27:06 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/07 13:27:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KVS_H
-# define KVS_H
+#include "../includes/command.h"
 
-# define KEY 0
-# define VALUE 1
-# define FIRST_INDEX 0
-
-typedef struct s_kvs
+bool	swap_content(t_lst *a, t_lst *b)
 {
-	char	*key;
-	char	*value;
-}	t_kvs;
+	void	*tmp;
 
-
-void	free_all_kvs(t_kvs *kvs);
-void	*create_content_kvs(char *key, char *value);
-char	*get_value(void *content);
-char	*get_key(void *content);
-t_lst	*get_min_lst(t_lst *lst);
-
-#endif
+	if (a == NULL || b == NULL)
+		return (false);
+	if (a->content == b->content)
+	{
+		return (true);
+	}
+	tmp = a->content;
+	a->content = b->content;
+	b->content = tmp;
+	return (true);
+}

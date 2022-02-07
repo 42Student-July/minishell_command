@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:43:17 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 09:12:39 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:26:08 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,27 @@ char	*get_value(void *content)
 
 	kvs = (t_kvs *)content;
 	return (kvs->value);
+}
+
+t_lst	*get_min_lst(t_lst *lst)
+{
+	t_lst	*tmp;
+	char	*min_key;
+	char	*next_key;
+
+	tmp = lst;
+	while (lst->next != NULL)
+	{
+		min_key = get_key(tmp->content);
+		next_key = get_key(lst->next->content);
+		// lvalueの方が大きいので、tmpをrvalueにchange
+		if (ft_strncmp(min_key, next_key, ft_strlen(min_key)) > 0)
+		{
+			tmp = lst->next;
+		}
+		lst = lst->next;
+	}
+	return (tmp);
 }
 
 

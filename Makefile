@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/05 13:50:57 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/07 13:29:18 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCNAME	:=	main_test.c \
 			kvs.c \
 			export.c \
 			init.c \
+			lst_utils.c \
 
 
 SRCS	:= $(addprefix $(SRCDIR), $(SRCNAME))
