@@ -30,14 +30,16 @@ void	set_sigint()
 
 char	*x_readline()
 {
-	char *prompt = "minishell $";
-	char *cmd = NULL;
+	char *prompt;
+	char *cmd;
 
+	prompt = strdup("minishell $");
 	signal(SIGQUIT, SIG_IGN); // sigquitがきたら無視する
 	g_is_waiting_for_input = true;
 	cmd = readline(prompt);
 	g_is_waiting_for_input = false;
 	signal(SIGQUIT, SIG_DFL); // sigquitをデフォルト動作に戻す
+	free(prompt);
 	return (cmd);
 }
 
@@ -60,12 +62,11 @@ void	test_readline()
 		printf("end\n");
 		free(cmd);
 	}
-	printf("\n");
 	clear_history();
 }
 
 /*
-	コンパイルにはオプションとして-lreadlineを入れる
+	コンパイル gcc -I /usr/local/opt/readline/include -lreadline -lhistory -L/usr/local/opt/readline/lib signal_test.c
 	実行中は上矢印キーで過去のコマンドが入力候補として表示される
 	ctrl+d で終了
 	MAX_HISTORY_NO より多くコマンドを入力すると古いコマンドから履歴が削除される

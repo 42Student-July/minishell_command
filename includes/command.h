@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
 /*   Updated: 2022/02/07 17:58:27 by mhirabay         ###   ########.fr       */
@@ -60,7 +60,7 @@ bool		is_self_cmd(const char *c);
 bool		execute_self(t_exec_attr *ea);
 void		create_self_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
 void		exec_in_child_process(t_exec_attr *ea);
-void		exec_in_main_process(t_exec_attr *ea);
+bool		exec_in_main_process(t_exec_attr *ea);
 
 
 // execute_builtin.c
@@ -74,6 +74,12 @@ void		exec_self_pwd(t_exec_attr *ea);
 
 // self_cd.c
 void		exec_self_cd(t_exec_attr *ea);
+
+// self_echo.c
+void		exec_self_echo(t_exec_attr *ea);
+
+// self_exit.c
+void		exec_self_exit(t_exec_attr *ea);
 
 // self_env.c
 void		exec_self_env(t_exec_attr *ea);

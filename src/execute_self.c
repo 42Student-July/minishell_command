@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_self.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/05 13:49:45 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:03:04 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,38 @@ bool	is_(const char *command, t_exec_attr *ea)
 	return (false);
 }
 
-void	exec_in_main_process(t_exec_attr *ea)
+bool	exec_in_main_process(t_exec_attr *ea)
 {
 	if (is_(CD, ea))
 		exec_self_cd(ea);
-	if (is_(EXPORT, ea))
+	else if (is_(EXPORT, ea))
 		exec_self_export(ea);
+	else if (is_(EXIT, ea))
+		exec_self_exit(ea);
+	else
+		return (false);
+	return (true);
 }
 
 void	exec_in_child_process(t_exec_attr *ea)
 {
 	if (is_(PWD, ea))
 		exec_self_pwd(ea);
-	if (is_(ENV, ea))
+	else if (is_(ECHO, ea))
+		exec_self_echo(ea);
+	else if (is_(ENV, ea))
 		exec_self_env(ea);
+
 }
 
 // echo などの自作コマンドを実行する関数
 bool	execute_self(t_exec_attr *ea)
 {
 	pid_t	pid;
-	int		status;
 
 	// cdは子プロセスで実行しないので、forkする前に事前実行
-	exec_in_main_process(ea);
+	if (exec_in_main_process(ea))
+		return (true);
 	pid = fork();
 	if (pid == -1)
 		abort_minishell(FORK_ERROR, ea);
@@ -52,12 +60,6 @@ bool	execute_self(t_exec_attr *ea)
 		if (is_redirect(ea))
 			change_direction(ea);
 		exec_in_child_process(ea);
-	}
-	else
-	{
-		pid = wait(&status);
-		if (pid == -1)
-			abort_minishell(FORK_ERROR, ea);
 	}
 	return (true);
 }
