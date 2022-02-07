@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_self.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/05 13:49:45 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:50:16 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ bool	execute_self(t_exec_attr *ea)
 	{
 		if (is_redirect(ea))
 			change_direction(ea);
+		if (is_(PWD, ea))
+			exec_self_pwd(ea);
+		if (is_(ECHO, ea))
+			exec_self_echo(ea);
+		if (is_(ENV, ea))
+			exec_self_env(ea);
 		exec_in_child_process(ea);
 	}
 	else
