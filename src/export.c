@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 13:36:02 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:12:56 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	sort_ascii(t_lst **export_lst)
 	tmp = *export_lst;
 	while (tmp->next != NULL)
 	{
-		min = get_min_lst(tmp);
+		min = get_min_key(tmp);
 		swap_content(tmp, min);
 		tmp = tmp->next;
 	}

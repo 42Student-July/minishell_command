@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:01:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 13:35:27 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:57:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void	store_env(t_exec_attr *ea, char **environ)
 	size_t		i;
 	char		**split;
 	t_lst		*env_lst;
-	t_content_f	f;
 	bool		flag;
 
-	f = print_kvs_debug;
 	env_lst = NULL;
 	i = 0;
 	while (environ[i] != NULL)
@@ -39,7 +37,16 @@ void	store_env(t_exec_attr *ea, char **environ)
 	ea->env = env_lst;
 }
 
-void	print_env(void *content)
+void	print_all_env_lst(t_lst *env)
+{
+	t_content_f	f;
+
+	f = print_env_kvs;
+	ft_lstiter(env, f);
+}
+
+
+void	print_env_kvs(void *content)
 {
 	t_kvs	*kvs;
 

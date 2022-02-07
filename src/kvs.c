@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:43:17 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 13:26:08 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:04:53 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,25 @@ char	*get_value(void *content)
 	return (kvs->value);
 }
 
-t_lst	*get_min_lst(t_lst *lst)
+bool	is_lvalue_bigger_ascii(char *lvalue, char *rvalue)
+{
+	size_t	llen;
+	size_t	rlen;
+	size_t	use_len;
+
+	llen = ft_strlen(lvalue);
+	rlen = ft_strlen(rvalue);
+	if (llen > rlen)
+		use_len = llen;
+	else
+		use_len = rlen;
+	if (ft_strncmp(lvalue, rvalue, use_len) > 0)
+		return (true);
+	return (false);
+}
+
+
+t_lst	*get_min_key(t_lst *lst)
 {
 	t_lst	*tmp;
 	char	*min_key;
@@ -52,10 +70,8 @@ t_lst	*get_min_lst(t_lst *lst)
 		min_key = get_key(tmp->content);
 		next_key = get_key(lst->next->content);
 		// lvalueの方が大きいので、tmpをrvalueにchange
-		if (ft_strncmp(min_key, next_key, ft_strlen(min_key)) > 0)
-		{
+		if (is_lvalue_bigger_ascii(min_key, next_key))
 			tmp = lst->next;
-		}
 		lst = lst->next;
 	}
 	return (tmp);
