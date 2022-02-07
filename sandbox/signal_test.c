@@ -62,7 +62,6 @@ void	test_readline()
 		printf("end\n");
 		free(cmd);
 	}
-	printf("\n");
 	clear_history();
 }
 
