@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/07 13:50:16 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:16:29 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ bool	execute_self(t_exec_attr *ea)
 	// cdは子プロセスで実行しないので、forkする前に事前実行
 	if (is_(CD, ea))
 		exec_self_cd(ea);
+	if (is_(EXIT, ea))
+		exec_self_exit(ea);
 	pid = fork();
 	if (pid == -1)
 		abort_minishell(FORK_ERROR, ea);

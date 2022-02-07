@@ -6,7 +6,7 @@
 #    By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/07 13:51:10 by tkirihar         ###   ########.fr        #
+#    Updated: 2022/02/07 14:18:11 by tkirihar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCNAME	:=	main_test.c \
 			self_pwd.c \
 			self_cd.c \
 			self_echo.c \
+			self_exit.c \
 			self_env.c \
 			error_handling.c \
 			redirect_process.c \
