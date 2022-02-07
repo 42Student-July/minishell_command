@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/07 14:59:51 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:03:04 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	exec_in_child_process(t_exec_attr *ea)
 bool	execute_self(t_exec_attr *ea)
 {
 	pid_t	pid;
-	int		status;
 
 	// cdは子プロセスで実行しないので、forkする前に事前実行
 	if (exec_in_main_process(ea))
