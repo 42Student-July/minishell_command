@@ -28,11 +28,6 @@ void	set_sigint()
 	sigaction(SIGINT, &act, NULL);
 }
 
-void	set_signal()
-{
-	set_sigint();             // ctrl + c
-}
-
 void	test_readline()
 {
 	char *prompt = "minishell $";
@@ -69,7 +64,7 @@ void	test_readline()
 */
 int	main(void)
 {
-	set_signal();
+	set_sigint();
 	test_readline();
 	return (EXIT_SUCCESS);
 }
