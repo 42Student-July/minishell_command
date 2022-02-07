@@ -28,25 +28,9 @@ void	set_sigint()
 	sigaction(SIGINT, &act, NULL);
 }
 
-void	new_sigquit(int sig)
-{
-	printf("new_sigquit\n");
-	exit(EXIT_SUCCESS);
-}
-
-void	set_sigquit()
-{
-	struct sigaction act;
-	act.sa_handler = new_sigquit;
-	act.sa_flags = 0;
-	sigemptyset(&act.sa_mask);
-	sigaction(SIGQUIT, &act, NULL);
-}
-
 void	set_signal()
 {
-	set_sigint();  // ctrl + c
-	// set_sigquit(); // ctrl + バックスラッシュ
+	set_sigint();             // ctrl + c
 }
 
 void	test_readline()
@@ -58,9 +42,11 @@ void	test_readline()
 
 	while (1)
 	{
+		signal(SIGQUIT, SIG_IGN); // sigquitがきたら無視する
 		g_is_waiting_for_input = true;
 		cmd = readline(prompt);
 		g_is_waiting_for_input = false;
+		signal(SIGQUIT, SIG_DFL); // sigquitをデフォルト動作に戻す
 		if (cmd == NULL)
 			break ;
 		printf("%s\n", cmd);
