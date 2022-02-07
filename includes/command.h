@@ -36,9 +36,13 @@
 # define PWD "pwd"
 # define EXIT "exit"
 # define ENV "env"
+# define EXPORT "export"
 # define MY_COMMAND_NUM 4
 # define CMD_NAME 0
+# define CMD_ARG 1
 # define DIR 1
+# define NULL_CHAR 1
+# define DQUOTE 2
 
 typedef struct s_exec_attr
 {
@@ -46,6 +50,7 @@ typedef struct s_exec_attr
 	char		*infile;
 	char		*outfile;
 	t_lst		*env;
+	t_lst		*export;
 }	t_exec_attr;
 
 
@@ -53,6 +58,9 @@ typedef struct s_exec_attr
 bool		is_self_cmd(const char *c);
 bool		execute_self(t_exec_attr *ea);
 void		create_self_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
+void		exec_in_child_process(t_exec_attr *ea);
+void		exec_in_main_process(t_exec_attr *ea);
+
 
 // execute_builtin.c
 void		execute_builtin(t_exec_attr *ea);
@@ -72,9 +80,14 @@ void		exec_self_echo(t_exec_attr *ea);
 // self_env.c
 void		exec_self_env(t_exec_attr *ea);
 
+// self_export.c
+void		exec_self_export(t_exec_attr *ea);
+
 // error_handling.c
-void		free_all(t_exec_attr *ea);
+void		free_exec_attr(t_exec_attr *ea);
+void		free_split(char **split);
 void		abort_minishell(char *msg, t_exec_attr *ea);
+void		abort_minishell_with(char *msg, t_exec_attr *ea, char **split);
 
 // redirect_process.c
 void		change_direction(t_exec_attr *ea);
@@ -86,7 +99,18 @@ void		print_kvs_debug(void *content);
 
 // env.c
 void		store_env(t_exec_attr *ea, char **environ);
-void		free_line(char **line);
+void		free_split(char **line);
 void		print_env(void *content);
+
+// export.c
+void		store_export(t_exec_attr *ea, char **environ);
+void		print_export_kvs(void *content);
+void		print_all_export_lst(t_lst *export_lst);
+
+// init.c
+void		init(t_exec_attr **ea);
+
+// lst_utils.c
+bool		swap_content(t_lst *a, t_lst *b);
 
 #endif

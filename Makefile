@@ -19,11 +19,15 @@ SRCNAME	:=	main_test.c \
 			self_cd.c \
 			self_echo.c \
 			self_env.c \
+			self_export.c \
 			error_handling.c \
 			redirect_process.c \
 			debug.c \
 			env.c \
 			kvs.c \
+			export.c \
+			init.c \
+			lst_utils.c \
 
 
 SRCS	:= $(addprefix $(SRCDIR), $(SRCNAME))

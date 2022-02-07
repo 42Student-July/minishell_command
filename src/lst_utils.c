@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/05 13:46:10 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/07 13:27:06 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/07 13:27:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-int	main(int argc, const char *argv[])
+bool	swap_content(t_lst *a, t_lst *b)
 {
-	t_exec_attr	*e_attr;
+	void	*tmp;
 
-	init(&e_attr);
-	if (is_self_cmd(argv[1]))
+	if (a == NULL || b == NULL)
+		return (false);
+	if (a->content == b->content)
 	{
-		create_self_cmd_from_arg(argc, argv, e_attr);
-		execute_self(e_attr);
+		return (true);
 	}
-	else
-	{
-		create_builtin_cmd_from_arg(argc, argv, e_attr);
-		execute_builtin(e_attr);
-	}
-	return (0);
+	tmp = a->content;
+	a->content = b->content;
+	b->content = tmp;
+	return (true);
 }

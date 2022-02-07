@@ -20,6 +20,22 @@ bool	is_(const char *command, t_exec_attr *ea)
 	return (false);
 }
 
+void	exec_in_main_process(t_exec_attr *ea)
+{
+	if (is_(CD, ea))
+		exec_self_cd(ea);
+	if (is_(EXPORT, ea))
+		exec_self_export(ea);
+}
+
+void	exec_in_child_process(t_exec_attr *ea)
+{
+	if (is_(PWD, ea))
+		exec_self_pwd(ea);
+	if (is_(ENV, ea))
+		exec_self_env(ea);
+}
+
 // echo などの自作コマンドを実行する関数
 bool	execute_self(t_exec_attr *ea)
 {
@@ -27,8 +43,7 @@ bool	execute_self(t_exec_attr *ea)
 	int		status;
 
 	// cdは子プロセスで実行しないので、forkする前に事前実行
-	if (is_(CD, ea))
-		exec_self_cd(ea);
+	exec_in_main_process(ea);
 	pid = fork();
 	if (pid == -1)
 		abort_minishell(FORK_ERROR, ea);
@@ -42,6 +57,7 @@ bool	execute_self(t_exec_attr *ea)
 			exec_self_echo(ea);
 		if (is_(ENV, ea))
 			exec_self_env(ea);
+		exec_in_child_process(ea);
 	}
 	else
 	{
@@ -82,6 +98,7 @@ void	create_self_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea)
 			i++;
 		}
 	}
+	command[i] = NULL;
 	ea->command = command;
 }
 
@@ -99,6 +116,8 @@ bool	is_self_cmd(const char *c)
 	if (ft_strncmp(c, EXIT, c_len) == 0)
 		return (true);
 	if (ft_strncmp(c, ENV, c_len) == 0)
+		return (true);
+	if (ft_strncmp(c, EXPORT, c_len) == 0)
 		return (true);
 	return (false);
 }
