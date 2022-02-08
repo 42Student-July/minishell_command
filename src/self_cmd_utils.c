@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:26:06 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 09:57:27 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 10:55:04 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void	print_error_msg_with_var(char *cmd_name, char *var)
 	ft_putstr_fd(": `", STDERR_FILENO);
 	ft_putstr_fd(var, STDERR_FILENO);
 	ft_putstr_fd("': ", STDERR_FILENO);
-	ft_putstr_fd(INVALID_IDENTIFER, STDERR_FILENO);
+	ft_putstr_fd(INVALID_IDENTIFER_MSG, STDERR_FILENO);
 }

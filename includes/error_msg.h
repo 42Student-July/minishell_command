@@ -5,7 +5,7 @@
 #define MALLOC_ERROR "malloc failed\n"
 #define FORK_ERROR "fork error\n"
 #define WAIT_ERROR "wait error\n"
-#define	INVALID_IDENTIFER "not an identifier\n"
+#define	INVALID_IDENTIFER_MSG "not an identifier\n"
 
 #endif
 
