@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 18:03:10 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:02:29 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	sort_ascii(t_lst **export_lst)
 	}
 }
 
+// この名前だったら引数eaでもいいかも
 void	print_all_export_lst(t_lst *export_lst)
 {
 	t_content_f	f;

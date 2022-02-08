@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 09:32:37 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/04 14:49:27 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 10:57:25 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_lst
 }	t_lst;
 
 typedef void(*	t_content_f)(void *);
+typedef void*(*	t_get_content_f)(void *);
 
 bool	ft_lstadd_back(t_lst **lst, t_lst *new);
 void	ft_lstadd_front(t_lst **lst, t_lst *new);
@@ -38,5 +39,6 @@ t_lst	*ft_lstlast(t_lst *lst);
 t_lst	*ft_lstmap(t_lst *lst, int (*f)(void *), void (*del)(void *));
 t_lst	*ft_lstnew(void *c);
 size_t	ft_lstsize(t_lst *lst);
+bool	ft_lstdel(t_lst *lst, t_lst *target);
 
 #endif

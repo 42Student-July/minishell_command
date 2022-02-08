@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 18:11:42 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 10:04:04 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,44 +27,15 @@ bool	addlst_sort_by_ascii(t_lst **export_lst, char **arg)
 	return (true);
 }
 
-bool	is_invalid_key(char *key)
-{
-	size_t	i;
-
-	i = 0;
-	// 数字は頭にあったら弾く
-	if (ft_isdigit(key[i]))
-		return (true);
-	while (key[i] != '\0')
-	{
-		if (!ft_isalnum(key[i]))
-			return (true);
-		i++;
-	}
-	return (true);
-}
-
 int	check_export_arg(char **arg)
 {
 	// ちょっと全部は把握しきれていないが、KEYに_以外の記号がはいったらout
-	if (is_invalid_key(arg[KEY]))
+	if (is_invalid_name(arg[KEY]))
 		return (INVALID_IDENTIFER);
 	if (arg[VALUE] == NULL)
 		return (NO_VALUE);
 
 	return (10);
-}
-
-void	print_invalid(t_exec_attr *ea, char **arg)
-{
-	// 引数の値も含めた値を標準エラー出力に出さないとだめ、だる
-	char *error_msg;
-
-	error_msg = ft_strjoin(EXPORT_INVALID_IDENTIFER, arg[KEY]);
-	if (error_msg == NULL)
-		abort_minishell_with(MALLOC_ERROR, ea, arg);
-	free(error_msg);
-	perror(error_msg);
 }
 
 void	store_arg_only_export(t_exec_attr *ea, char *key)
@@ -95,21 +66,23 @@ void	export_with_args(t_exec_attr *ea)
 				abort_minishell(MALLOC_ERROR, ea);
 			ret = check_export_arg(arg);
 			if (ret == INVALID_IDENTIFER)
-				print_invalid(ea, arg);
-			if (ret == NO_VALUE)
+				print_error_msg_with_var(ea->command[CMD_ARG], arg[KEY]);
+			else
 			{
-				// valueがnullだけど=が存在する場合、valueには\0を入れる。
-				arg[VALUE] = ft_strdup("");
-				if (arg[VALUE] == NULL)
+				if (ret == NO_VALUE)
+				{
+					// valueがnullだけど=が存在する場合、valueには\0を入れる。
+					arg[VALUE] = ft_strdup("");
+					if (arg[VALUE] == NULL)
+						abort_minishell_with(MALLOC_ERROR, ea, arg);
+				}
+				flag = ft_lstadd_back(&ea->env, \
+				ft_lstnew(create_content_kvs(arg[KEY], arg[VALUE])));
+				if (!flag)
+					abort_minishell_with(MALLOC_ERROR, ea, arg);
+				if (!addlst_sort_by_ascii(&ea->export, arg))
 					abort_minishell_with(MALLOC_ERROR, ea, arg);
 			}
-			flag = ft_lstadd_back(&ea->env, \
-			ft_lstnew(create_content_kvs(arg[KEY], arg[VALUE])));
-			if (!flag)
-				abort_minishell_with(MALLOC_ERROR, ea, arg);
-			if (!addlst_sort_by_ascii(&ea->export, arg))
-				abort_minishell_with(MALLOC_ERROR, ea, arg);
-
 			free(arg);
 		}
 	}

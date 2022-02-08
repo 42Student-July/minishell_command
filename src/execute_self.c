@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_self.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/07 15:03:04 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:06:56 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ bool	exec_in_main_process(t_exec_attr *ea)
 		exec_self_export(ea);
 	else if (is_(EXIT, ea))
 		exec_self_exit(ea);
+	else if (is_(UNSET, ea))
+		exec_self_unset(ea);
 	else
 		return (false);
 	return (true);
@@ -41,7 +43,6 @@ void	exec_in_child_process(t_exec_attr *ea)
 		exec_self_echo(ea);
 	else if (is_(ENV, ea))
 		exec_self_env(ea);
-
 }
 
 // echo などの自作コマンドを実行する関数
@@ -98,6 +99,7 @@ void	create_self_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea)
 	ea->command = command;
 }
 
+// TODO: is_関数を使う
 bool	is_self_cmd(const char *c)
 {
 	size_t	c_len;
@@ -113,7 +115,7 @@ bool	is_self_cmd(const char *c)
 		return (true);
 	if (ft_strncmp(c, ENV, c_len) == 0)
 		return (true);
-	if (ft_strncmp(c, EXPORT, c_len) == 0)
+	if (ft_strncmp(c, UNSET, c_len) == 0)
 		return (true);
 	return (false);
 }

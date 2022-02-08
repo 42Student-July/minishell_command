@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/07 17:58:27 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:06:08 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define EXIT "exit"
 # define ENV "env"
 # define EXPORT "export"
+# define UNSET "unset"
 # define MY_COMMAND_NUM 4
 # define CMD_NAME 0
 # define CMD_ARG 1
@@ -84,6 +85,9 @@ void		exec_self_exit(t_exec_attr *ea);
 // self_env.c
 void		exec_self_env(t_exec_attr *ea);
 
+// self_unset.c
+void		exec_self_unset(t_exec_attr *ea);
+
 // self_export.c
 void		exec_self_export(t_exec_attr *ea);
 void		store_arg_only_export(t_exec_attr *ea, char *key);
@@ -121,5 +125,10 @@ void		init(t_exec_attr **ea);
 
 // lst_utils.c
 bool		swap_content(t_lst *a, t_lst *b);
+t_lst		*get_lst_by_key(t_lst *lst, char *key);
+
+// self_cmd_utils.c
+bool		is_invalid_name(char *name);
+void		print_error_msg_with_var(char *cmd_name, char *var);
 
 #endif
