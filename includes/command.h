@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 09:59:04 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:06:08 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void		exec_self_exit(t_exec_attr *ea);
 
 // self_env.c
 void		exec_self_env(t_exec_attr *ea);
+
+// self_unset.c
+void		exec_self_unset(t_exec_attr *ea);
 
 // self_export.c
 void		exec_self_export(t_exec_attr *ea);
