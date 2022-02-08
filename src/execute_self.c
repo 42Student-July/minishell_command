@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_self.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/08 11:06:56 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:46:00 by tkirihar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ void	exec_in_child_process(t_exec_attr *ea)
 }
 
 // echo などの自作コマンドを実行する関数
-bool	execute_self(t_exec_attr *ea)
+void	execute_self(t_exec_attr *ea)
 {
 	pid_t	pid;
+	int		status;
 
 	// cdは子プロセスで実行しないので、forkする前に事前実行
 	if (exec_in_main_process(ea))
-		return (true);
+		return ;
 	pid = fork();
 	if (pid == -1)
 		abort_minishell(FORK_ERROR, ea);
@@ -61,8 +62,15 @@ bool	execute_self(t_exec_attr *ea)
 		if (is_redirect(ea))
 			change_direction(ea);
 		exec_in_child_process(ea);
+		exit(0);
 	}
-	return (true);
+	else
+	{
+		pid = wait(&status);
+		if (pid == -1)
+			abort_minishell(FORK_ERROR, ea);
+	}
+	return ;
 }
 
 // TODO: いずれリファクタ
