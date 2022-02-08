@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/01/12 15:50:15 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/08 10:53:36 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = ft_lstadd_back.c \
 			ft_lstsize.c \
 			ft_lstnew.c \
 			ft_lstdel_front.c \
+			ft_lstdel.c \
 
 OBJS = ${SRCS:.c=.o}
 
