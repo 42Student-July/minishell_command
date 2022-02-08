@@ -37,12 +37,16 @@ void	execute_builtin(t_exec_attr *ea)
 
 void	x_execve(t_exec_attr *ea)
 {
-	// TODO: NULL判定などは未実装
-	if (execve(ea->command[CMD_NAME], ea->command, NULL) == -1)
+	char	**environ;
+
+	environ = convert_to_array(ea->env);
+	if (execve(ea->command[CMD_NAME], ea->command, environ) == -1)
 	{
 		printf("stderror(perror) : %s\n", strerror(errno));
+		free(environ);
 		exit(EXIT_FAILURE);
 	}
+	free(environ);
 }
 
 bool	is_not_exec_path(const char *command)

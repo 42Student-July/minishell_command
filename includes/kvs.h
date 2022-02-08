@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:27:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 10:58:21 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:28:14 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_kvs
 	char	*value;
 }	t_kvs;
 
-
 void	free_all_kvs(t_kvs *kvs);
 void	*create_content_kvs(char *key, char *value);
 char	*get_value(void *content);
@@ -32,6 +31,6 @@ char	*get_key(void *content);
 t_lst	*get_min_key(t_lst *lst);
 bool	is_lvalue_bigger_ascii(char *lvalue, char *rvalue);
 bool	is_same_key(char *a, char *b);
-
+char	**convert_to_array(t_lst *lst);
 
 #endif
