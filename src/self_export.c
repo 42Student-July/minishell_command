@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 09:59:39 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 10:04:04 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,23 @@ void	export_with_args(t_exec_attr *ea)
 				abort_minishell(MALLOC_ERROR, ea);
 			ret = check_export_arg(arg);
 			if (ret == INVALID_IDENTIFER)
+				print_error_msg_with_var(ea->command[CMD_ARG], arg[KEY]);
+			else
 			{
-			}
-			if (ret == NO_VALUE)
-			{
-				// valueがnullだけど=が存在する場合、valueには\0を入れる。
-				arg[VALUE] = ft_strdup("");
-				if (arg[VALUE] == NULL)
+				if (ret == NO_VALUE)
+				{
+					// valueがnullだけど=が存在する場合、valueには\0を入れる。
+					arg[VALUE] = ft_strdup("");
+					if (arg[VALUE] == NULL)
+						abort_minishell_with(MALLOC_ERROR, ea, arg);
+				}
+				flag = ft_lstadd_back(&ea->env, \
+				ft_lstnew(create_content_kvs(arg[KEY], arg[VALUE])));
+				if (!flag)
+					abort_minishell_with(MALLOC_ERROR, ea, arg);
+				if (!addlst_sort_by_ascii(&ea->export, arg))
 					abort_minishell_with(MALLOC_ERROR, ea, arg);
 			}
-			flag = ft_lstadd_back(&ea->env, \
-			ft_lstnew(create_content_kvs(arg[KEY], arg[VALUE])));
-			if (!flag)
-				abort_minishell_with(MALLOC_ERROR, ea, arg);
-			if (!addlst_sort_by_ascii(&ea->export, arg))
-				abort_minishell_with(MALLOC_ERROR, ea, arg);
-
 			free(arg);
 		}
 	}
