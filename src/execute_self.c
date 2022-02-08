@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_self.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/08 13:46:00 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:47:49 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	create_self_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea)
 {
 	int		i;
 	char	**command;
+	char	*arg;
 
 	i = 0;
 	command = (char **)malloc(sizeof(char *) * (argc - 1 + 1));
@@ -97,7 +98,19 @@ void	create_self_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea)
 		}
 		else
 		{
-			command[i] = ft_strdup(argv[i + 1]);
+			arg = (char *)argv[i + 1];
+			if (is_dollar(arg))
+			{
+				arg = convert_env_var(ea, arg);
+				if (arg == NULL)
+				{
+					// $の後、環境変数に指定していない値が来た時、その引数の読み込みを飛ばす
+					// 検証をちゃんとしていないので、この辺は要検討
+					i++;
+					continue;
+				}
+			}
+			command[i] = ft_strdup(arg);
 			if (command[i] == NULL)
 				abort_minishell(MALLOC_ERROR, ea);
 			i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 13:42:19 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:48:26 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,9 @@ t_lst		*get_lst_by_key(t_lst *lst, char *key);
 // self_cmd_utils.c
 bool		is_invalid_name(char *name);
 void		print_error_msg_with_var(char *cmd_name, char *var);
+
+// create_cmd_utils.c
+bool		is_dollar(char *arg);
+char		*convert_env_var(t_exec_attr *ea, char *arg);
 
 #endif
