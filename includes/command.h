@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 11:06:08 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:27:39 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define DIR 1
 # define NULL_CHAR 1
 # define DQUOTE 2
+# define EQUAL 1
+# define LF 1
 # define INVALID_IDENTIFER 0
 
 typedef struct s_exec_attr
@@ -62,7 +64,6 @@ bool		execute_self(t_exec_attr *ea);
 void		create_self_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
 void		exec_in_child_process(t_exec_attr *ea);
 bool		exec_in_main_process(t_exec_attr *ea);
-
 
 // execute_builtin.c
 void		execute_builtin(t_exec_attr *ea);
@@ -105,13 +106,13 @@ bool		is_redirect(t_exec_attr *ea);
 // debug.c
 void		print_command_debug(t_exec_attr *ea);
 void		print_kvs_debug(void *content);
+void		print_array(char **array);
 
 // env.c
 void		store_env(t_exec_attr *ea, char **environ);
 void		free_split(char **line);
 void		print_all_env_lst(t_lst *env);
 void		print_env_kvs(void *content);
-
 
 // export.c
 char		*create_export_value(char *value);
