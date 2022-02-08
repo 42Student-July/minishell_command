@@ -122,6 +122,7 @@ void		init(t_exec_attr **ea);
 
 // lst_utils.c
 bool		swap_content(t_lst *a, t_lst *b);
+t_lst		*get_lst_by_key(t_lst *lst, char *key);
 
 // self_cmd_utils.c
 bool		is_invalid_name(char *name);
