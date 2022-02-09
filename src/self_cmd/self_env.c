@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:36:05 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 14:35:25 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:48:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_all_env_lst(t_exec_attr *ea)
 	t_content_f	f;
 
 	f = print_env_kvs;
-	ft_lstiter(ea->env, f);
+	ft_lstiter(ea->env_lst, f);
 }
 
 void	print_env_kvs(void *content)

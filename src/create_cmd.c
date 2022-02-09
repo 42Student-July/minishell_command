@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 16:40:07 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 15:11:43 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:48:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*convert_env_var(t_exec_attr *ea, char *arg)
 	// TODO:あとで消す quote対応
 	arg = ft_strtrim(arg, "\'");
 	key = ++arg;
-	ret = get_lst_by_key(ea->env, key);
+	ret = get_lst_by_key(ea->env_lst, key);
 	if (ret == NULL)
 		return (NULL);
 	value = get_value(ret->content);

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:27:06 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 13:57:15 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:57:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,12 @@ t_lst	*get_lst_by_min_ascii_key(t_lst *lst)
 		lst = lst->next;
 	}
 	return (tmp);
+}
+
+void	del_lst_by_key(t_lst *lst, char *key)
+{
+	t_lst	*tmp;
+
+	tmp = get_lst_by_key(lst, key);
+	ft_lstdel(lst, tmp);
 }

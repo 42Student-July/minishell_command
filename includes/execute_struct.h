@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   self_export_utils.c                                :+:      :+:    :+:   */
+/*   execute_struct.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 15:47:44 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/09 15:44:58 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/09 15:49:02 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/command.h"
+#ifndef EXECUTE_STRUCT_H
+# define EXECUTE_STRUCT_H
 
-void	print_all_export_lst(t_exec_attr *ea)
+# include "../lib/ft_lst/ft_lst.h"
+
+typedef struct s_exec_attr
 {
-	t_content_f	f;
+	char *const	*command;
+	char		*infile;
+	char		*outfile;
+	t_lst		*env_lst;
+	t_lst		*export_lst;
+}	t_exec_attr;
 
-	f = print_export_kvs;
-	ft_lstiter(ea->export_lst, f);
-}
-
-void	print_export_kvs(void *content)
+typedef struct s_kvs
 {
-	t_kvs	*kvs;
+	char	*key;
+	char	*value;
+}	t_kvs;
 
-	kvs = (t_kvs *)content;
-	if (kvs->value == NULL)
-		printf("declare -x %s\n", kvs->key);
-	else
-		printf("declare -x %s=%s\n", kvs->key, kvs->value);
-}
+#endif
+
