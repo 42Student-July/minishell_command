@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 09:42:42 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 09:48:17 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,6 @@ char	*create_export_value(char *value)
 	ft_strlcat(new_value, value, new_value_len);
 	ft_strlcat(new_value, "\"", new_value_len);
 	return (new_value);
-}
-
-void	sort_ascii(t_lst **export_lst)
-{
-	// 大文字アルファベット → _ → 小文字のアルファベットに並び替える
-	t_lst	*min;
-	t_lst	*tmp;
-
-	tmp = *export_lst;
-	while (tmp->next != NULL)
-	{
-		min = get_min_key(tmp);
-		swap_content(tmp, min);
-		tmp = tmp->next;
-	}
 }
 
 void	print_all_export_lst(t_exec_attr *ea)
@@ -80,7 +65,7 @@ void	store_export(t_exec_attr *ea, char **environ)
 		i++;
 		free_split(split);
 	}
-	sort_ascii(&export_lst);
+	sort_lst_ascii(&export_lst);
 	ea->export = export_lst;
 }
 
