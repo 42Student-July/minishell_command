@@ -11,8 +11,6 @@ bool	g_fin_status;
 void	interactive_sigint(int sig, siginfo_t *info, void *ucontext)
 {
 	(void)ucontext;
-	// if (!g_is_waiting_for_input)
-	// 	return ;
 	printf("\n");
 	rl_replace_line("", 0); // プロンプトのバッファをクリア
 	rl_on_new_line();       // プロンプトを次の行に移動したいことを伝える？
