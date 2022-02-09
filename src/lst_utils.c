@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:27:06 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:09:05 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:46:04 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	swap_lst_content(t_lst *a, t_lst *b)
 	return (true);
 }
 
-void	sort_key_ascii(t_lst *lst)
+void	sort_lstkey_by_ascii(t_lst *lst)
 {
 	// 大文字アルファベット → _ → 小文字のアルファベットに並び替える
 	t_lst	*min;

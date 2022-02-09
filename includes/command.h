@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:07:52 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:46:04 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void		print_array(char **array);
 char		*create_export_value(char *value);
 void		store_export(t_exec_attr *ea, char **environ);
 void		print_export_kvs(void *content);
-void		sort_key_ascii(t_lst *export_lst);
+void		sort_lstkey_by_ascii(t_lst *export_lst);
 void		print_all_export_lst(t_exec_attr *ea);
 
 // init.c

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:07:52 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:46:04 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	addlst_sort_by_ascii(t_lst **export_lst, char **arg)
 				create_export_value(arg[VALUE]))));
 	if (!flag)
 		return (false);
-	sort_key_ascii(*export_lst);
+	sort_lstkey_by_ascii(*export_lst);
 	return (true);
 }
 
@@ -43,7 +43,7 @@ void	store_arg_only_export(t_exec_attr *ea, char *key)
 	if (!ft_lstadd_back(&ea->export, \
 			ft_lstnew(create_content_kvs(key, NULL))))
 		abort_minishell(MALLOC_ERROR, ea);
-	sort_key_ascii(ea->export);
+	sort_lstkey_by_ascii(ea->export);
 }
 
 
