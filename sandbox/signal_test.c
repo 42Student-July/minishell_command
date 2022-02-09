@@ -43,6 +43,21 @@ void	set_dfl_sigint()
 	sigaction(SIGINT, &act, NULL);
 }
 
+void	dfl_sigquit(int sig, siginfo_t *info, void *ucontext)
+{
+	(void)ucontext;
+	printf("Quit: 3\n");
+}
+
+void	set_dfl_sigquit()
+{
+	struct sigaction act;
+	act.sa_sigaction = dfl_sigquit;
+	act.sa_flags = 0;
+	sigemptyset(&act.sa_mask);
+	sigaction(SIGINT, &act, NULL);
+}
+
 char	*x_readline()
 {
 	char *prompt;
@@ -53,6 +68,7 @@ char	*x_readline()
 	set_interactive_sigint();
 	cmd = readline(prompt);
 	set_dfl_sigint();
+	set_dfl_sigquit();
 	signal(SIGQUIT, SIG_DFL); // sigquitをデフォルト動作に戻す
 	return (cmd);
 }
