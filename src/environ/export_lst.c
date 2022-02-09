@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:19:25 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 13:49:55 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:47:44 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ void	store_export(t_exec_attr *ea, char **environ)
 		free_char_dptr(split);
 	}
 	sort_lstkey_by_ascii(export_lst);
-	ea->export = export_lst;
+	ea->export_lst = export_lst;
 }

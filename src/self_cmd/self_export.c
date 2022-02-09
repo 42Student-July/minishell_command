@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 14:35:46 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:48:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	check_export_arg(char **arg)
 
 void	store_arg_only_export(t_exec_attr *ea, char *key)
 {	
-	if (!ft_lstadd_back(&ea->export, \
+	if (!ft_lstadd_back(&ea->export_lst, \
 			ft_lstnew(create_kvs_content(key, NULL))))
 		abort_minishell(MALLOC_ERROR, ea);
-	sort_lstkey_by_ascii(ea->export);
+	sort_lstkey_by_ascii(ea->export_lst);
 }
 
 void	export_with_args(t_exec_attr *ea)
@@ -74,11 +74,11 @@ void	export_with_args(t_exec_attr *ea)
 					if (arg[VALUE] == NULL)
 						abort_minishell_with(MALLOC_ERROR, ea, arg);
 				}
-				flag = ft_lstadd_back(&ea->env, \
+				flag = ft_lstadd_back(&ea->env_lst, \
 				ft_lstnew(create_kvs_content(arg[KEY], arg[VALUE])));
 				if (!flag)
 					abort_minishell_with(MALLOC_ERROR, ea, arg);
-				if (!addlst_sort_by_ascii(&ea->export, arg))
+				if (!addlst_sort_by_ascii(&ea->export_lst, arg))
 					abort_minishell_with(MALLOC_ERROR, ea, arg);
 			}
 			free(arg);

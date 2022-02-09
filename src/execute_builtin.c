@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/09 15:02:35 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:48:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**convert_envlst_to_array(t_exec_attr *ea)
 	t_lst	*tmp;
 
 	i = 0;
-	tmp = ea->env;
+	tmp = ea->env_lst;
 	env_lst_size = ft_lstsize(tmp);
 	array = (char **)malloc(sizeof(char *) * (env_lst_size + NULL_CHAR));
 	if (array == NULL)
