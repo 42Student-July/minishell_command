@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 09:51:32 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:01:35 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ void		exec_self_exit(t_exec_attr *ea);
 
 // self_env.c
 void		exec_self_env(t_exec_attr *ea);
+void		store_env(t_exec_attr *ea, char **environ);
+void		print_all_env_lst(t_exec_attr *ea);
+void		print_env_kvs(void *content);
 
 // self_unset.c
 void		exec_self_unset(t_exec_attr *ea);
@@ -107,12 +110,6 @@ bool		is_redirect(t_exec_attr *ea);
 void		print_command_debug(t_exec_attr *ea);
 void		print_kvs_debug(void *content);
 void		print_array(char **array);
-
-// env.c
-void		store_env(t_exec_attr *ea, char **environ);
-void		free_split(char **line);
-void		print_all_env_lst(t_exec_attr *ea);
-void		print_env_kvs(void *content);
 
 // self_export_utils.c
 char		*create_export_value(char *value);
