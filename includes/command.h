@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 11:02:35 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:00:28 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include "../lib/ft_lst/ft_lst.h"
 # include "color.h"
 # include "error_msg.h"
-# include "kvs.h"
 
 # define CD "cd"
 # define ECHO "echo"
@@ -47,6 +46,15 @@
 # define EQUAL 1
 # define LF 1
 # define INVALID_IDENTIFER 0
+# define KEY 0
+# define VALUE 1
+# define NO_VALUE 1
+
+typedef struct s_kvs
+{
+	char	*key;
+	char	*value;
+}	t_kvs;
 
 typedef struct s_exec_attr
 {
@@ -135,5 +143,13 @@ void		print_error_msg_with_var(char *cmd_name, char *var);
 // create_cmd_utils.c
 bool		is_dollar(char *arg);
 char		*convert_env_var(t_exec_attr *ea, char *arg);
+
+void		free_all_kvs(t_kvs *kvs);
+void		*create_kvs_content(char *key, char *value);
+char		*get_value(void *content);
+char		*get_key(void *content);
+t_lst		*get_lst_by_min_ascii_key(t_lst *lst);
+bool		is_lvalue_bigger_ascii(char *lvalue, char *rvalue);
+bool		is_same_key(char *a, char *b);
 
 #endif
