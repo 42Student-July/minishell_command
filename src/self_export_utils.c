@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:48:23 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:50:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	store_export(t_exec_attr *ea, char **environ)
 		if (!flag)
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		i++;
-		free_split(split);
+		free_char_dptr(split);
 	}
 	sort_lstkey_by_ascii(export_lst);
 	ea->export = export_lst;

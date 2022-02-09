@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:13 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/08 17:47:54 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:59:51 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	x_execve(t_exec_attr *ea)
 {
 	char	**environ;
 
-	environ = convert_to_array(ea->env);
+	environ = convert_envlst_to_array(ea);
 	if (execve(ea->command[CMD_NAME], ea->command, environ) == -1)
 	{
 		printf("stderror(perror) : %s\n", strerror(errno));
@@ -120,4 +120,56 @@ void	create_builtin_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea)
 	}
 	command[i] = NULL;
 	ea->command = command;
+}
+
+char	**convert_envlst_to_array(t_exec_attr *ea)
+{
+	char	**array;
+	size_t	env_lst_size;
+	size_t	i;
+	t_lst	*tmp;
+
+	i = 0;
+	tmp = ea->env;
+	env_lst_size = ft_lstsize(tmp);
+	array = (char **)malloc(sizeof(char *) * (env_lst_size + NULL_CHAR));
+	if (array == NULL)
+		return (NULL);
+	while (i < env_lst_size)
+	{
+		//　TODO: 行数長くなっちゃうからget_keyの引数はlstでもいいのかも
+		array[i] = create_environ_line(\
+			get_key(tmp->content), get_value(tmp->content), false);
+		if (array[i] == NULL)
+			abort_minishell_with(MALLOC_ERROR, ea, array);
+		tmp = tmp->next;
+		i++;
+	}
+	array[i] = NULL;
+	// print_array(array);
+	return (array);
+}
+
+
+char	*create_environ_line(char *key, char *value, bool is_end)
+{
+	size_t	key_size;
+	size_t	value_size;
+	size_t	line_size;
+	char	*line;
+
+	key_size = ft_strlen(key);
+	value_size = ft_strlen(value);
+	line_size = key_size + EQUAL + value_size + LF;
+	line = (char *)malloc(sizeof(char) * line_size);
+	if (line == NULL)
+		return (NULL);
+	ft_strlcat(line, key, line_size);
+	ft_strlcat(line, "=", line_size);
+	ft_strlcat(line, value, line_size);
+	if (is_end)
+		ft_strlcat(line, "\n", line_size);
+	else
+		ft_strlcat(line, "\0", line_size);
+	return (line);
 }

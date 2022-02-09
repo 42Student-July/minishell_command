@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:36:05 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:48:23 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:50:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	store_env(t_exec_attr *ea, char **environ)
 		if (!flag)
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		i++;
-		free_split(split);
+		free_char_dptr(split);
 	}
 	ea->env = env_lst;
 }

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:46:04 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:02:35 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void		execute_builtin(t_exec_attr *ea);
 void		create_builtin_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
 void		x_execve(t_exec_attr *ea);
 bool		is_not_exec_path(const char *command);
+char		**convert_envlst_to_array(t_exec_attr *ea);
+char		*create_environ_line(char *key, char *value, bool is_end);
+
 
 // self_pwd.c
 void		exec_self_pwd(t_exec_attr *ea);
@@ -98,7 +101,7 @@ void		store_arg_only_export(t_exec_attr *ea, char *key);
 
 // error_handling.c
 void		free_exec_attr(t_exec_attr *ea);
-void		free_split(char **split);
+void		free_char_dptr(char **split);
 void		abort_minishell(char *msg, t_exec_attr *ea);
 void		abort_minishell_with(char *msg, t_exec_attr *ea, char **split);
 

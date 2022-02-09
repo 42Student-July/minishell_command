@@ -19,7 +19,7 @@ void	free_exec_attr(t_exec_attr *ea)
 		free(ea);
 }
 
-void	free_split(char **split)
+void	free_char_dptr(char **split)
 {
 	size_t	i;
 
@@ -48,7 +48,7 @@ void	abort_minishell(char *msg, t_exec_attr *ea)
 void	abort_minishell_with(char *msg, t_exec_attr *ea, char **split)
 {
 	if (split != NULL)
-		free_split(split);
+		free_char_dptr(split);
 	perror(msg);
 	if (ea != NULL)
 		free_exec_attr(ea);
