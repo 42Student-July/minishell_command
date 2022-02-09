@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:46:04 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:48:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	store_export(t_exec_attr *ea, char **environ)
 		if (value == NULL)
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		flag = ft_lstadd_back(&export_lst, \
-		ft_lstnew(create_content_kvs(split[KEY], value)));
+		ft_lstnew(create_kvs_content(split[KEY], value)));
 		if (!flag)
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		i++;

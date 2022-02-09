@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:27:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 14:28:14 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:48:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_kvs
 }	t_kvs;
 
 void	free_all_kvs(t_kvs *kvs);
-void	*create_content_kvs(char *key, char *value);
+void	*create_kvs_content(char *key, char *value);
 char	*get_value(void *content);
 char	*get_key(void *content);
 t_lst	*get_min_key(t_lst *lst);

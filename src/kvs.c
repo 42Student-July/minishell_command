@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:43:17 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 14:33:32 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:48:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ bool	is_same_key(char *a, char *b)
 	return (true);
 }
 
-void	*create_content_kvs(char *key, char *value)
+void	*create_kvs_content(char *key, char *value)
 {
 	t_kvs	*kvs;
 

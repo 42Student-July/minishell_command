@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:36:05 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:00:10 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:48:23 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	store_env(t_exec_attr *ea, char **environ)
 		if (split == NULL)
 			abort_minishell(MALLOC_ERROR, ea);
 		flag = ft_lstadd_back(&env_lst, \
-		ft_lstnew(create_content_kvs(split[KEY], split[VALUE])));
+		ft_lstnew(create_kvs_content(split[KEY], split[VALUE])));
 		if (!flag)
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		i++;
