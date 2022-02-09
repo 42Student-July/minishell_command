@@ -33,13 +33,12 @@ char	*x_readline()
 	char *prompt;
 	char *cmd;
 
-	prompt = strdup("minishell $");
+	prompt = "minishell $";
 	signal(SIGQUIT, SIG_IGN); // sigquitがきたら無視する
 	g_is_waiting_for_input = true;
 	cmd = readline(prompt);
 	g_is_waiting_for_input = false;
 	signal(SIGQUIT, SIG_DFL); // sigquitをデフォルト動作に戻す
-	free(prompt);
 	return (cmd);
 }
 
