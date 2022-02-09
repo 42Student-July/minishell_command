@@ -8,7 +8,7 @@
 
 bool	g_is_waiting_for_input;
 
-void	new_sigint(int sig, siginfo_t *info, void *ucontext)
+void	interactive_sigint(int sig, siginfo_t *info, void *ucontext)
 {
 	(void)ucontext;
 	if (!g_is_waiting_for_input)
@@ -19,10 +19,10 @@ void	new_sigint(int sig, siginfo_t *info, void *ucontext)
 	rl_redisplay();         // プロンプトを再描画
 }
 
-void	set_sigint()
+void	set_interactive_sigint()
 {
 	struct sigaction act;
-	act.sa_sigaction = new_sigint;
+	act.sa_sigaction = interactive_sigint;
 	act.sa_flags = 0;
 	sigemptyset(&act.sa_mask);
 	sigaction(SIGINT, &act, NULL);
@@ -35,6 +35,7 @@ char	*x_readline()
 
 	prompt = "minishell $";
 	signal(SIGQUIT, SIG_IGN); // sigquitがきたら無視する
+	set_interactive_sigint();
 	g_is_waiting_for_input = true;
 	cmd = readline(prompt);
 	g_is_waiting_for_input = false;
