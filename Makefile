@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/09 13:46:10 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/09 13:55:48 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME 	:= minishell
 ENV_DIR := environ/
 ENV_SRCNAME := 	env_lst.c \
 				export_lst.c \
-				kvs.c \
+				kvs_utils.c \
 				lst_utils.c \
 
 ENV_SRCS = $(addprefix $(ENV_DIR), $(ENV_SRCNAME))

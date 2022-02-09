@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:27:06 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 13:16:59 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:57:15 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	sort_lstkey_by_ascii(t_lst *lst)
 
 	while (lst->next != NULL)
 	{
-		min = get_min_key(lst);
+		min = get_lst_by_min_ascii_key(lst);
 		swap_lst_content(lst, min);
 		lst = lst->next;
 	}
@@ -53,4 +53,23 @@ t_lst	*get_lst_by_key(t_lst *lst, char *key)
 		ret = ret->next;
 	}
 	return (NULL);
+}
+
+t_lst	*get_lst_by_min_ascii_key(t_lst *lst)
+{
+	t_lst	*tmp;
+	char	*min_key;
+	char	*next_key;
+
+	tmp = lst;
+	while (lst->next != NULL)
+	{
+		min_key = get_key(tmp->content);
+		next_key = get_key(lst->next->content);
+		// lvalueの方が大きいので、tmpをrvalueにchange
+		if (is_lvalue_bigger_ascii(min_key, next_key))
+			tmp = lst->next;
+		lst = lst->next;
+	}
+	return (tmp);
 }

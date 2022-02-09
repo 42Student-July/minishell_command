@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:48:23 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:54:34 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	check_export_arg(char **arg)
 		return (INVALID_IDENTIFER);
 	if (arg[VALUE] == NULL)
 		return (NO_VALUE);
-
 	return (10);
 }
 
@@ -45,7 +44,6 @@ void	store_arg_only_export(t_exec_attr *ea, char *key)
 		abort_minishell(MALLOC_ERROR, ea);
 	sort_lstkey_by_ascii(ea->export);
 }
-
 
 void	export_with_args(t_exec_attr *ea)
 {
@@ -90,7 +88,6 @@ void	export_with_args(t_exec_attr *ea)
 
 void	exec_self_export(t_exec_attr *ea)
 {
-
 	if (ea->command[CMD_ARG] == NULL)
 		print_all_export_lst(ea);
 	else

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:27:53 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 10:59:15 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:57:03 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_all_kvs(t_kvs *kvs);
 void	*create_kvs_content(char *key, char *value);
 char	*get_value(void *content);
 char	*get_key(void *content);
-t_lst	*get_min_key(t_lst *lst);
+t_lst	*get_lst_by_min_ascii_key(t_lst *lst);
 bool	is_lvalue_bigger_ascii(char *lvalue, char *rvalue);
 bool	is_same_key(char *a, char *b);
 
