@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 14:00:28 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:51:25 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,21 @@ typedef struct s_exec_attr
 // execute_self.c
 bool		is_self_cmd(const char *c);
 void		execute_self(t_exec_attr *ea);
-void		create_self_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
+void		create_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
 void		exec_in_child_process(t_exec_attr *ea);
 bool		exec_in_main_process(t_exec_attr *ea);
 
 // execute_builtin.c
 void		execute_builtin(t_exec_attr *ea);
-void		create_builtin_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
 void		x_execve(t_exec_attr *ea);
 bool		is_not_exec_path(const char *command);
 char		**convert_envlst_to_array(t_exec_attr *ea);
 char		*create_environ_line(char *key, char *value, bool is_end);
 
+// create_cmd.c
+bool		is_dollar(char *arg);
+char		*convert_env_var(t_exec_attr *ea, char *arg);
+void		create_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea);
 
 // self_pwd.c
 void		exec_self_pwd(t_exec_attr *ea);
@@ -139,10 +142,6 @@ t_lst		*get_lst_by_key(t_lst *lst, char *key);
 // self_cmd_utils.c
 bool		is_invalid_name(char *name);
 void		print_error_msg_with_var(char *cmd_name, char *var);
-
-// create_cmd_utils.c
-bool		is_dollar(char *arg);
-char		*convert_env_var(t_exec_attr *ea, char *arg);
 
 void		free_all_kvs(t_kvs *kvs);
 void		*create_kvs_content(char *key, char *value);
