@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/08 16:40:41 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/09 09:51:50 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,14 @@ SRCNAME	:=	main_test.c \
 			self_exit.c \
 			self_env.c \
 			self_export.c \
+			self_export_utils.c \
 			self_unset.c \
 			error_handling.c \
 			redirect_process.c \
 			debug.c \
 			env.c \
 			kvs.c \
-			export.c \
-			init.c \
+				init.c \
 			lst_utils.c \
 			self_cmd_utils.c \
 			create_cmd_utils.c \
