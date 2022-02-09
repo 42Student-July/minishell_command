@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_self.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/09 09:55:18 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:02:31 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,52 +65,6 @@ void	execute_self(t_exec_attr *ea)
 		exec_self_env(ea);
 }
 
-// TODO: いずれリファクタ
-void	create_self_cmd_from_arg(int argc, const char **argv, t_exec_attr *ea)
-{
-	int		i;
-	char	**command;
-	char	*arg;
-
-	i = 0;
-	command = (char **)malloc(sizeof(char *) * (argc - 1 + 1));
-	if (command == NULL)
-		abort_minishell(MALLOC_ERROR, ea);
-	while (i < argc - 1)
-	{
-		if (strcmp(argv[i + 1], "<") == 0)
-		{
-			ea->infile = strdup(argv[i + 2]);
-			i++;
-		}
-		else if (ft_strncmp(argv[i + 1], ">", ft_strlen(argv[i + 1])) == 0)
-		{
-			ea->outfile = strdup(argv[i + 2]);
-			i++;
-		}
-		else
-		{
-			arg = (char *)argv[i + 1];
-			if (is_dollar(arg))
-			{
-				arg = convert_env_var(ea, arg);
-				if (arg == NULL)
-				{
-					// $の後、環境変数に指定していない値が来た時、その引数の読み込みを飛ばす
-					// 検証をちゃんとしていないので、この辺は要検討
-					i++;
-					continue;
-				}
-			}
-			command[i] = ft_strdup(arg);
-			if (command[i] == NULL)
-				abort_minishell(MALLOC_ERROR, ea);
-			i++;
-		}
-	}
-	command[i] = NULL;
-	ea->command = command;
-}
 
 // TODO: is_関数を使う
 bool	is_self_cmd(const char *c)
