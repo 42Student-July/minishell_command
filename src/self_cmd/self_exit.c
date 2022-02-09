@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   self_cd.c                                          :+:      :+:    :+:   */
+/*   self_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 14:54:54 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 10:27:48 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/07 14:07:33 by tkirihar          #+#    #+#             */
+/*   Updated: 2022/02/09 14:35:31 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../../includes/command.h"
 
-static void	x_chdir(const char *path)
+void	exec_self_exit(t_exec_attr *ea)
 {
-	if (chdir(path) == -1)
-	{
-		printf("stderror(perror) : %s\n", strerror(errno));
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	exec_self_cd(t_exec_attr *ea)
-{
-	x_chdir(ea->command[DIR]);
+	(void)ea;
+	exit(0);
 }

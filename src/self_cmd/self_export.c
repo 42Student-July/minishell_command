@@ -6,11 +6,11 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 13:54:34 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:35:46 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../../includes/command.h"
 
 // 新しく追加
 bool	addlst_sort_by_ascii(t_lst **export_lst, char **arg)

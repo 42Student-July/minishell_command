@@ -6,11 +6,11 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:26:06 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 10:55:04 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:35:08 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../../includes/command.h"
 
 bool	is_invalid_name(char *name)
 {

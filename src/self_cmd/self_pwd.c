@@ -6,11 +6,11 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:54:57 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/03 10:28:00 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:35:50 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../../includes/command.h"
 
 static void	x_getcwd(char *pathname, int bufsiz)
 {

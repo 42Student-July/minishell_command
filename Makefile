@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/02/09 13:55:48 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/02/09 14:38:18 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,26 +21,30 @@ ENV_SRCNAME := 	env_lst.c \
 
 ENV_SRCS = $(addprefix $(ENV_DIR), $(ENV_SRCNAME))
 
+SELFCMD_DIR := self_cmd/
+SELFCMD_SRCNAME := self_pwd.c \
+				self_cd.c \
+				self_echo.c \
+				self_exit.c \
+				self_env.c \
+				self_export.c \
+				self_export_utils.c \
+				self_unset.c \
+				self_cmd_utils.c \
+
+SELFCMD_SRCS := $(addprefix $(SELFCMD_DIR), $(SELFCMD_SRCNAME))
+
 SRCDIR 	:= ./src/
 SRCNAME	:=	main_test.c \
 			execute_builtin.c \
 			execute_self.c \
-			self_pwd.c \
-			self_cd.c \
-			self_echo.c \
-			self_exit.c \
-			self_env.c \
-			self_export.c \
-			self_export_utils.c \
-			self_unset.c \
 			error_handling.c \
 			redirect_process.c \
 			debug.c \
 			init.c \
-			self_cmd_utils.c \
 			create_cmd_utils.c \
-			$(ENV_SRCS)
-
+			$(ENV_SRCS) \
+			$(SELFCMD_SRCS) \
 
 SRCS	:= $(addprefix $(SRCDIR), $(SRCNAME))
 
@@ -73,6 +77,7 @@ $(OBJSDIR)%.o : $(SRCDIR)%.c
 
 $(OBJSDIR):
 	mkdir -p $(OBJSDIR)$(ENV_DIR)
+	mkdir -p $(OBJSDIR)$(SELFCMD_DIR)
 
 clean:
 	make clean -C lib/ft_printf

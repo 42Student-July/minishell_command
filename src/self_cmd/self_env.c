@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   self_export_utils.c                                :+:      :+:    :+:   */
+/*   self_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 13:53:21 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/04 16:36:05 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/09 14:35:25 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../../includes/command.h"
 
-void	print_all_export_lst(t_exec_attr *ea)
+// TODO:引数あるバージョンは未対応
+void	exec_self_env(t_exec_attr *ea)
+{
+	print_all_env_lst(ea);
+}
+
+void	print_all_env_lst(t_exec_attr *ea)
 {
 	t_content_f	f;
 
-	f = print_export_kvs;
-	ft_lstiter(ea->export, f);
+	f = print_env_kvs;
+	ft_lstiter(ea->env, f);
 }
 
-void	print_export_kvs(void *content)
+void	print_env_kvs(void *content)
 {
 	t_kvs	*kvs;
 
 	kvs = (t_kvs *)content;
 	if (kvs->value == NULL)
-		printf("declare -x %s\n", kvs->key);
+		printf("%s=\n", kvs->key);
 	else
-		printf("declare -x %s=%s\n", kvs->key, kvs->value);
+		printf("%s=%s\n", kvs->key, kvs->value);
 }
