@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 17:48:26 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:00:28 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include "../lib/ft_lst/ft_lst.h"
 # include "color.h"
 # include "error_msg.h"
-# include "kvs.h"
 
 # define CD "cd"
 # define ECHO "echo"
@@ -47,6 +46,15 @@
 # define EQUAL 1
 # define LF 1
 # define INVALID_IDENTIFER 0
+# define KEY 0
+# define VALUE 1
+# define NO_VALUE 1
+
+typedef struct s_kvs
+{
+	char	*key;
+	char	*value;
+}	t_kvs;
 
 typedef struct s_exec_attr
 {
@@ -70,6 +78,9 @@ void		execute_builtin(t_exec_attr *ea);
 void		create_builtin_cmd_from_arg(int argc, const char *argv[], t_exec_attr *ea);
 void		x_execve(t_exec_attr *ea);
 bool		is_not_exec_path(const char *command);
+char		**convert_envlst_to_array(t_exec_attr *ea);
+char		*create_environ_line(char *key, char *value, bool is_end);
+
 
 // self_pwd.c
 void		exec_self_pwd(t_exec_attr *ea);
@@ -85,6 +96,9 @@ void		exec_self_exit(t_exec_attr *ea);
 
 // self_env.c
 void		exec_self_env(t_exec_attr *ea);
+void		store_env(t_exec_attr *ea, char **environ);
+void		print_all_env_lst(t_exec_attr *ea);
+void		print_env_kvs(void *content);
 
 // self_unset.c
 void		exec_self_unset(t_exec_attr *ea);
@@ -95,7 +109,7 @@ void		store_arg_only_export(t_exec_attr *ea, char *key);
 
 // error_handling.c
 void		free_exec_attr(t_exec_attr *ea);
-void		free_split(char **split);
+void		free_char_dptr(char **split);
 void		abort_minishell(char *msg, t_exec_attr *ea);
 void		abort_minishell_with(char *msg, t_exec_attr *ea, char **split);
 
@@ -108,24 +122,18 @@ void		print_command_debug(t_exec_attr *ea);
 void		print_kvs_debug(void *content);
 void		print_array(char **array);
 
-// env.c
-void		store_env(t_exec_attr *ea, char **environ);
-void		free_split(char **line);
-void		print_all_env_lst(t_lst *env);
-void		print_env_kvs(void *content);
-
-// export.c
+// self_export_utils.c
 char		*create_export_value(char *value);
 void		store_export(t_exec_attr *ea, char **environ);
 void		print_export_kvs(void *content);
-void		sort_ascii(t_lst **export_lst);
-void		print_all_export_lst(t_lst *export_lst);
+void		sort_lstkey_by_ascii(t_lst *export_lst);
+void		print_all_export_lst(t_exec_attr *ea);
 
 // init.c
 void		init(t_exec_attr **ea);
 
 // lst_utils.c
-bool		swap_content(t_lst *a, t_lst *b);
+bool		swap_lst_content(t_lst *a, t_lst *b);
 t_lst		*get_lst_by_key(t_lst *lst, char *key);
 
 // self_cmd_utils.c
@@ -135,5 +143,13 @@ void		print_error_msg_with_var(char *cmd_name, char *var);
 // create_cmd_utils.c
 bool		is_dollar(char *arg);
 char		*convert_env_var(t_exec_attr *ea, char *arg);
+
+void		free_all_kvs(t_kvs *kvs);
+void		*create_kvs_content(char *key, char *value);
+char		*get_value(void *content);
+char		*get_key(void *content);
+t_lst		*get_lst_by_min_ascii_key(t_lst *lst);
+bool		is_lvalue_bigger_ascii(char *lvalue, char *rvalue);
+bool		is_same_key(char *a, char *b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/09 13:36:22 by tkirihar         ###   ########.fr       */
+/*   Updated: 2022/02/09 09:55:18 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ bool	is_self_cmd(const char *c)
 	if (ft_strncmp(c, PWD, c_len) == 0)
 		return (true);
 	if (ft_strncmp(c, EXIT, c_len) == 0)
+		return (true);
+	if (ft_strncmp(c, EXPORT, c_len) == 0)
 		return (true);
 	if (ft_strncmp(c, ENV, c_len) == 0)
 		return (true);

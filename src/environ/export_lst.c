@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   export_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 11:02:29 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/09 13:19:25 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/09 13:49:55 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../../includes/command.h"
+
 char	*create_export_value(char *value)
 {
 	// 合成して ex)declare -x key="value"を作る
@@ -32,30 +33,6 @@ char	*create_export_value(char *value)
 	return (new_value);
 }
 
-void	sort_ascii(t_lst **export_lst)
-{
-	// 大文字アルファベット → _ → 小文字のアルファベットに並び替える
-	t_lst	*min;
-	t_lst	*tmp;
-
-	tmp = *export_lst;
-	while (tmp->next != NULL)
-	{
-		min = get_min_key(tmp);
-		swap_content(tmp, min);
-		tmp = tmp->next;
-	}
-}
-
-// この名前だったら引数eaでもいいかも
-void	print_all_export_lst(t_lst *export_lst)
-{
-	t_content_f	f;
-
-	f = print_export_kvs;
-	ft_lstiter(export_lst, f);
-}
-
 void	store_export(t_exec_attr *ea, char **environ)
 {
 	size_t		i;
@@ -75,23 +52,12 @@ void	store_export(t_exec_attr *ea, char **environ)
 		if (value == NULL)
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		flag = ft_lstadd_back(&export_lst, \
-		ft_lstnew(create_content_kvs(split[KEY], value)));
+		ft_lstnew(create_kvs_content(split[KEY], value)));
 		if (!flag)
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		i++;
-		free_split(split);
+		free_char_dptr(split);
 	}
-	sort_ascii(&export_lst);
+	sort_lstkey_by_ascii(export_lst);
 	ea->export = export_lst;
-}
-
-void	print_export_kvs(void *content)
-{
-	t_kvs	*kvs;
-
-	kvs = (t_kvs *)content;
-	if (kvs->value == NULL)
-		printf("declare -x %s\n", kvs->key);
-	else
-		printf("declare -x %s=%s\n", kvs->key, kvs->value);
 }

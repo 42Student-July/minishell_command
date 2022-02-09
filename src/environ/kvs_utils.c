@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kvs.c                                              :+:      :+:    :+:   */
+/*   kvs_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:43:17 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 14:33:32 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:57:11 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/command.h"
+#include "../../includes/command.h"
 
 void	free_all_kvs(t_kvs *kvs)
 {
@@ -57,26 +57,6 @@ bool	is_lvalue_bigger_ascii(char *lvalue, char *rvalue)
 	return (false);
 }
 
-
-t_lst	*get_min_key(t_lst *lst)
-{
-	t_lst	*tmp;
-	char	*min_key;
-	char	*next_key;
-
-	tmp = lst;
-	while (lst->next != NULL)
-	{
-		min_key = get_key(tmp->content);
-		next_key = get_key(lst->next->content);
-		// lvalueの方が大きいので、tmpをrvalueにchange
-		if (is_lvalue_bigger_ascii(min_key, next_key))
-			tmp = lst->next;
-		lst = lst->next;
-	}
-	return (tmp);
-}
-
 bool	is_same_key(char *a, char *b)
 {
 	if (ft_strlen(a) != ft_strlen(b))
@@ -86,7 +66,7 @@ bool	is_same_key(char *a, char *b)
 	return (true);
 }
 
-void	*create_content_kvs(char *key, char *value)
+void	*create_kvs_content(char *key, char *value)
 {
 	t_kvs	*kvs;
 
@@ -108,73 +88,7 @@ void	*create_content_kvs(char *key, char *value)
 	}
 	else
 	{
-		printf("value NULL\n");
 		kvs->value = NULL;
 	}
 	return ((void *)kvs);
-}
-
-void	*free_char_double_ptr(char **column)
-{
-	size_t	i;
-
-	i = 0;
-	if (column != NULL)
-	{
-		while (column[i] != NULL)
-		{
-			free(column[i]);
-		}
-		free(column);
-	}
-	return (NULL);
-}
-
-char	*create_environ_line(char *key, char *value, bool is_end)
-{
-	size_t	key_size;
-	size_t	value_size;
-	size_t	line_size;
-	char	*line;
-
-	key_size = ft_strlen(key);
-	value_size = ft_strlen(value);
-	line_size = key_size + EQUAL + value_size + LF;
-	line = (char *)malloc(sizeof(char) * line_size);
-	if (line == NULL)
-		return (NULL);
-	ft_strlcat(line, key, line_size);
-	ft_strlcat(line, "=", line_size);
-	ft_strlcat(line, value, line_size);
-	if (is_end)
-		ft_strlcat(line, "\n", line_size);
-	else
-		ft_strlcat(line, "\0", line_size);
-	return (line);
-}
-
-char	**convert_to_array(t_lst *lst)
-{
-	char	**array;
-	size_t	lst_size;
-	size_t	i;
-
-	i = 0;
-	lst_size = ft_lstsize(lst);
-	array = (char **)malloc(sizeof(char *) * (lst_size + NULL_CHAR));
-	if (array == NULL)
-		return (NULL);
-	while (i < lst_size)
-	{
-		//　TODO: 行数長くなっちゃうからget_keyの引数はlstでもいいのかも
-		array[i] = create_environ_line(\
-			get_key(lst->content), get_value(lst->content), false);
-		if (array[i] == NULL)
-			return (free_char_double_ptr(array));
-		lst = lst->next;
-		i++;
-	}
-	array[i] = NULL;
-	// print_array(array);
-	return (array);
 }
