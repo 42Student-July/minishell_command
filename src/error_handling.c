@@ -19,27 +19,25 @@ void	free_exec_attr(t_exec_attr *ea)
 		free(ea);
 }
 
-void	free_char_dptr(char **split)
+void	free_char_dptr(char **dptr)
 {
 	size_t	i;
 
 	i = 0;
-	if (split != NULL)
+	if (dptr != NULL)
 	{
-		while (split[i] != NULL)
+		while (dptr[i] != NULL)
 		{
-			free(split[i]);
+			free(dptr[i]);
 			i++;
 		}
-		free(split);
+		free(dptr);
 	}
 }
 
 void	abort_minishell(char *msg, t_exec_attr *ea)
 {
-	//TODO: いずれ削除する
-	printf("msg : %s\n", msg);
-	perror(msg);
+	ft_putstr_fd(msg, STDERR_FILENO);
 	if (ea != NULL)
 		free_exec_attr(ea);
 	exit(EXIT_FAILURE);

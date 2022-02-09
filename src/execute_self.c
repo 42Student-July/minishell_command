@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 11:07:18 by tkirihar          #+#    #+#             */
-/*   Updated: 2022/02/09 15:02:31 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:14:29 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,6 @@ bool	is_(const char *command, t_exec_attr *ea)
 	if (ft_strncmp(ea->command[CMD_NAME], command, ft_strlen(command)) == 0)
 		return (true);
 	return (false);
-}
-
-bool	exec_in_main_process(t_exec_attr *ea)
-{
-	if (is_(CD, ea))
-		exec_self_cd(ea);
-	else if (is_(EXPORT, ea))
-		exec_self_export(ea);
-	else if (is_(EXIT, ea))
-		exec_self_exit(ea);
-	else if (is_(UNSET, ea))
-		exec_self_unset(ea);
-	else
-		return (false);
-	return (true);
-}
-
-void	exec_in_child_process(t_exec_attr *ea)
-{
-	if (is_(PWD, ea))
-		exec_self_pwd(ea);
-	else if (is_(ECHO, ea))
-		exec_self_echo(ea);
-	else if (is_(ENV, ea))
-		exec_self_env(ea);
 }
 
 void	execute_self(t_exec_attr *ea)
@@ -64,7 +39,6 @@ void	execute_self(t_exec_attr *ea)
 	else if (is_(ENV, ea))
 		exec_self_env(ea);
 }
-
 
 // TODO: is_関数を使う
 bool	is_self_cmd(const char *c)

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:59:10 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 14:51:25 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:27:33 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,6 @@ char		*get_key(void *content);
 t_lst		*get_lst_by_min_ascii_key(t_lst *lst);
 bool		is_lvalue_bigger_ascii(char *lvalue, char *rvalue);
 bool		is_same_key(char *a, char *b);
+void		del_lst_by_key(t_lst *lst, char *key);
 
 #endif
