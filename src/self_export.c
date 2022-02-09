@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 10:04:04 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 09:42:33 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,11 @@ void	export_with_args(t_exec_attr *ea)
 	}
 }
 
-void	export_no_args(t_exec_attr *ea)
-{
-	print_all_export_lst(ea->export);
-}
-
 void	exec_self_export(t_exec_attr *ea)
 {
 
 	if (ea->command[CMD_ARG] == NULL)
-		export_no_args(ea);
+		print_all_export_lst(ea);
 	else
 		export_with_args(ea);
 }
