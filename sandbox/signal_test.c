@@ -6,13 +6,13 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-bool	g_is_waiting_for_input;
+bool	g_fin_status;
 
 void	interactive_sigint(int sig, siginfo_t *info, void *ucontext)
 {
 	(void)ucontext;
-	if (!g_is_waiting_for_input)
-		return ;
+	// if (!g_is_waiting_for_input)
+	// 	return ;
 	printf("\n");
 	rl_replace_line("", 0); // プロンプトのバッファをクリア
 	rl_on_new_line();       // プロンプトを次の行に移動したいことを伝える？
@@ -28,6 +28,21 @@ void	set_interactive_sigint()
 	sigaction(SIGINT, &act, NULL);
 }
 
+void	dfl_sigint(int sig, siginfo_t *info, void *ucontext)
+{
+	(void)ucontext;
+	g_fin_status = 1;
+}
+
+void	set_dfl_sigint()
+{
+	struct sigaction act;
+	act.sa_sigaction = dfl_sigint;
+	act.sa_flags = 0;
+	sigemptyset(&act.sa_mask);
+	sigaction(SIGINT, &act, NULL);
+}
+
 char	*x_readline()
 {
 	char *prompt;
@@ -36,9 +51,8 @@ char	*x_readline()
 	prompt = "minishell $";
 	signal(SIGQUIT, SIG_IGN); // sigquitがきたら無視する
 	set_interactive_sigint();
-	g_is_waiting_for_input = true;
 	cmd = readline(prompt);
-	g_is_waiting_for_input = false;
+	set_dfl_sigint();
 	signal(SIGQUIT, SIG_DFL); // sigquitをデフォルト動作に戻す
 	return (cmd);
 }
@@ -73,7 +87,6 @@ void	test_readline()
 */
 int	main(void)
 {
-	set_sigint();
 	test_readline();
 	return (EXIT_SUCCESS);
 }
