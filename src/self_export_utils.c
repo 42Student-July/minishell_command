@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   self_export_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 13:27:06 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 17:03:17 by mhirabay         ###   ########.fr       */
+/*   Created: 2022/02/04 20:24:01 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/02/09 13:53:21 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-bool	swap_content(t_lst *a, t_lst *b)
+void	print_all_export_lst(t_exec_attr *ea)
 {
-	void	*tmp;
+	t_content_f	f;
 
-	if (a == NULL || b == NULL)
-		return (false);
-	if (a->content == b->content)
-	{
-		return (true);
-	}
-	tmp = a->content;
-	a->content = b->content;
-	b->content = tmp;
-	return (true);
+	f = print_export_kvs;
+	ft_lstiter(ea->export, f);
 }
 
-t_lst	*get_lst_by_key(t_lst *lst, char *key)
+void	print_export_kvs(void *content)
 {
-	t_lst	*ret;
+	t_kvs	*kvs;
 
-	ret = lst;
-	while (ret != NULL)
-	{
-		if (is_same_key(get_key(ret->content), key))
-			return (ret);
-		ret = ret->next;
-	}
-	return (NULL);
+	kvs = (t_kvs *)content;
+	if (kvs->value == NULL)
+		printf("declare -x %s\n", kvs->key);
+	else
+		printf("declare -x %s=%s\n", kvs->key, kvs->value);
 }

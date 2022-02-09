@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:53:41 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/08 10:04:04 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:54:34 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ bool	addlst_sort_by_ascii(t_lst **export_lst, char **arg)
 	bool	flag;
 
 	flag = ft_lstadd_back(export_lst, \
-			ft_lstnew(create_content_kvs(arg[KEY], \
+			ft_lstnew(create_kvs_content(arg[KEY], \
 				create_export_value(arg[VALUE]))));
 	if (!flag)
 		return (false);
-	sort_ascii(export_lst);
+	sort_lstkey_by_ascii(*export_lst);
 	return (true);
 }
 
@@ -34,18 +34,16 @@ int	check_export_arg(char **arg)
 		return (INVALID_IDENTIFER);
 	if (arg[VALUE] == NULL)
 		return (NO_VALUE);
-
 	return (10);
 }
 
 void	store_arg_only_export(t_exec_attr *ea, char *key)
 {	
 	if (!ft_lstadd_back(&ea->export, \
-			ft_lstnew(create_content_kvs(key, NULL))))
+			ft_lstnew(create_kvs_content(key, NULL))))
 		abort_minishell(MALLOC_ERROR, ea);
-	sort_ascii(&ea->export);
+	sort_lstkey_by_ascii(ea->export);
 }
-
 
 void	export_with_args(t_exec_attr *ea)
 {
@@ -77,7 +75,7 @@ void	export_with_args(t_exec_attr *ea)
 						abort_minishell_with(MALLOC_ERROR, ea, arg);
 				}
 				flag = ft_lstadd_back(&ea->env, \
-				ft_lstnew(create_content_kvs(arg[KEY], arg[VALUE])));
+				ft_lstnew(create_kvs_content(arg[KEY], arg[VALUE])));
 				if (!flag)
 					abort_minishell_with(MALLOC_ERROR, ea, arg);
 				if (!addlst_sort_by_ascii(&ea->export, arg))
@@ -88,16 +86,10 @@ void	export_with_args(t_exec_attr *ea)
 	}
 }
 
-void	export_no_args(t_exec_attr *ea)
-{
-	print_all_export_lst(ea->export);
-}
-
 void	exec_self_export(t_exec_attr *ea)
 {
-
 	if (ea->command[CMD_ARG] == NULL)
-		export_no_args(ea);
+		print_all_export_lst(ea);
 	else
 		export_with_args(ea);
 }
