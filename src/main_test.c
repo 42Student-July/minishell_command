@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 09:57:42 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/02/09 14:54:14 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/02/11 10:44:25 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int	main(int argc, const char *argv[])
 		execute_self(e_attr);
 	else
 		execute_builtin(e_attr);
+	free_exec_attr(e_attr);
+	// system("leaks minishell");
 	return (0);
 }
