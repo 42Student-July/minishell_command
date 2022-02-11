@@ -53,7 +53,7 @@ void	set_dfl_sigquit()
 	act.sa_sigaction = dfl_sigquit;
 	act.sa_flags = 0;
 	sigemptyset(&act.sa_mask);
-	sigaction(SIGINT, &act, NULL);
+	sigaction(SIGQUIT, &act, NULL);
 }
 
 char	*x_readline()
@@ -66,8 +66,8 @@ char	*x_readline()
 	set_interactive_sigint();
 	cmd = readline(prompt);
 	set_dfl_sigint();
-	set_dfl_sigquit();
 	signal(SIGQUIT, SIG_DFL); // sigquitをデフォルト動作に戻す
+	set_dfl_sigquit();
 	return (cmd);
 }
 
@@ -75,7 +75,6 @@ void	test_readline()
 {
 	char *cmd = NULL;
 	int history_i = 0;
-	HIST_ENTRY *rm_history = NULL;
 
 	while (1)
 	{
